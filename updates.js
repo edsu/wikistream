@@ -11,7 +11,7 @@ chans = ["#en.wikipedia", "#fr.wikipedia", "#es.wikipedia",
 var client = new irc({
     server: 'irc.wikimedia.org',
     nick: 'wikistream',
-    log: true,
+    log: false,
     user: {
         username: 'wikistream-bot',
         realname: 'http://github.com/edsu/wikistream',
@@ -41,8 +41,7 @@ client.connect(function () {
         m = parse_msg(msg.params);
         if (m) {
             db.publish("wikipedia", JSON.stringify(m));
-            console.log(msg);
-            console.log(m);
+            console.log(m.page);
         }
     });
 });
