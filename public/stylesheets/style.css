@@ -3,9 +3,32 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+header {
+  font-size: 18pt;
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
+}
+
+header img {
+    vertical-align: middle;
+}
+
 .update a {
     text-decoration: none;
 }
+
+.update img {
+    margin-right: 3px;
+}
+
+#updates {
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 
 
 

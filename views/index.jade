@@ -6,13 +6,20 @@ script(type="text/javascript')
     socket.connect();
     socket.on("message", function(data){
       var msg = jQuery.parseJSON(data);
+      var i = $("<img>").attr({src: "/images/" + msg.lang + ".png"});
       var a = $("<a>").attr({href: msg.url, title: msg.comment}).text(msg.page);
-      var d = $("<div>").attr({class: "update"}).append(a).hide();
-      $('#status').prepend(d);
+      var d = $("<div>").attr({"class": "update"}).append(i).append(a).hide();
+      $('#updates').prepend(d);
       d.slideDown("fast");
-      $('.update').slice(25).detach();
+      $('.update').slice(35).detach();
     });
   }
 
-h2 Wikipedia Updates
-div(id='status')
+header 
+  img(src="/images/wikipedia.png")
+  span wikistream
+
+a(href="http://github.com/edsu/wikistream")
+  img(style="position: absolute; top: 0; right: 0; border: 0;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
+
+div(id='updates')
