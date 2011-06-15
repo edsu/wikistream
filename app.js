@@ -36,7 +36,8 @@ app.get('/', function(req, res){
 
 app.listen(3000);
 
-// io.socket configuration
+
+// set up the update stream
 
 var socket = io.listen(app);
 socket.on('connect', function(client) {
