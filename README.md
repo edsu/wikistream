@@ -12,6 +12,6 @@ And then you'll need to start the webapp;
 
     node app.js
 
-The point your browser at:
+Then point your browser at:
 
     http://localhost:3000/
