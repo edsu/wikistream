@@ -4,7 +4,7 @@ body {
 }
 
 header {
-  font-size: 18pt;
+  font-size: 24pt;
   margin-left: auto;
   margin-right: auto;
   width: 35%;
@@ -16,6 +16,7 @@ header img {
 
 .update a {
     text-decoration: none;
+    font-size: 12pt;
 }
 
 .update img {
