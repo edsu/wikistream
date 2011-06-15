@@ -1,0 +1,18 @@
+script(type="text/javascript')
+  $(document).ready(init);
+
+  function init() {
+    var socket = new io.Socket();
+    socket.connect();
+    socket.on("message", function(data){
+      var msg = jQuery.parseJSON(data);
+      var a = $("<a>").attr({href: msg.url, title: msg.comment}).text(msg.page);
+      var d = $("<div>").attr({class: "update"}).append(a).hide();
+      $('#status').prepend(d);
+      d.slideDown("fast");
+      $('.update').slice(25).detach();
+    });
+  }
+
+h2 Wikipedia Updates
+div(id='status')
