@@ -1,25 +1,64 @@
 script(type="text/javascript')
   $(document).ready(init);
+  var pause = false;
 
   function init() {
     var socket = new io.Socket();
     socket.connect();
     socket.on("message", function(data){
+      if (pause) return;
       var msg = jQuery.parseJSON(data);
       var i = $("<img>").attr({src: "/images/" + msg.lang + ".png"});
-      var a = $("<a>").attr({href: msg.url, title: msg.comment}).text(msg.page);
+      var a = $("<a>").attr({href: msg.url, title: msg.comment, target: '_new'}).text(msg.page);
       var d = $("<div>").attr({"class": "update"}).append(i).append(a).hide();
       $('#updates').prepend(d);
       d.slideDown("fast");
       $('.update').slice(30).detach();
     });
+
+    function toggle_pause() {
+      pause = ! pause;
+    }
+
+    $(document).bind('keydown', 'p', toggle_pause);
   }
 
 header 
   img(src="/images/wikipedia.png")
-  span wikistream
+  span(class='wikistream') wikistream
 
 a(href="http://github.com/edsu/wikistream")
   img(style="position: absolute; top: 0; right: 0; border: 0;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
 
-div(id='updates')
+div(id='about')
+  p
+    span(class='wikistream') wikistream 
+    span is an experimental visualization of realtime edits in major language 
+    a(href="http://wikipedia.org") Wikipedias. 
+    span Every time someone updates or creates a Wikipedia article you will see it ever so briefly in this list. 
+    
+  p If you'd like to pause the display at any time just hit 
+    span(class="wikistream") p 
+    span to toggle pausing on and off. If you hover over the link you should see the comment associated with the change.
+
+
+  p 
+    span Hopefully 
+    span(class="wikistream") wikistream 
+    span provides a hint of just how active the community is around Wikipedia.  It's really important to recognize the level of involvement of folks around the world, who are actively engaged in creating and editing Wikipedia content.
+
+
+  p 
+    span(class='wikistream') wikistream 
+    span was built using node.js and redis.  node connects to the Wikimedia IRC server, joins the wikipedia channels and pushes updates into redis via pub/sub, which the node webapp is then able to deliver into your browser through the magic of 
+    a(href="socket.io") socket.io 
+    span If you are curious, or want to add/suggest something, checkout the code on 
+    a(href="http://github.com/edsu/wikistream") GitHub
+
+  p
+    img(src="/images/redis.png", width=200)
+    br
+    img(src="/images/node.png", width=200)
+
+p
+  div(id='updates')

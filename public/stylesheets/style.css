@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding-left: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,7 +7,7 @@ header {
   font-size: 24pt;
   margin-left: auto;
   margin-right: auto;
-  width: 35%;
+  width: 400px;
 }
 
 header img {
@@ -15,21 +15,33 @@ header img {
 }
 
 .update a {
-    text-decoration: none;
     font-size: 12pt;
+}
+
+#about {
+    width: 20%;
+    height: 550px;
+    float: left;
+    margin-left: 10%;
+    vertical-align: top;
+}
+
+#updates {
+    float: left;
+    margin-left: 10%;
+    height: 550px;
+    width: 60%;
 }
 
 .update img {
     margin-right: 3px;
+    overflow: auto;
 }
 
-#updates {
-    width: 35%;
-    margin-left: auto;
-    margin-right: auto;
+.wikistream {
+    font-family: 'Slackey';
 }
 
-
-
-
-
+a {
+    text-decoration: none;
+}
