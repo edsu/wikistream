@@ -8,7 +8,7 @@ to redis:
 
     node updates.js
 
-And then you'll need to start the webapp;
+Then you'll need to start the webapp;
 
     node app.js
 
