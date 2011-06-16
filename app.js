@@ -33,8 +33,8 @@ app.get('/', function(req, res){
   });
 });
 
+app.setMaxListeners(100);
 app.listen(3000);
-app.setMaxListeners(200);
 
 
 // set up the update stream
