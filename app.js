@@ -35,6 +35,7 @@ app.get('/', function(req, res){
 });
 
 app.listen(3000);
+app.setMaxListeners(50);
 
 
 // set up the update stream

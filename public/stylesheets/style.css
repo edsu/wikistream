@@ -14,10 +14,6 @@ header img {
     vertical-align: middle;
 }
 
-.update a {
-    font-size: 12pt;
-}
-
 #about {
     width: 20%;
     height: 550px;
@@ -33,9 +29,60 @@ header img {
     width: 60%;
 }
 
+.update a {
+    font-size: 12pt;
+    color: black;
+}
+
 .update img {
     margin-right: 3px;
     overflow: auto;
+}
+
+/* MB = Minor Bot */
+
+.update.MB a {
+    color: blue;
+}
+
+/* B = Bot */
+
+.update.B a {
+    color: blue; 
+}
+
+/* N = New */
+
+.update.N a {
+    color: green;
+}
+
+/* M = Minor */
+
+.update.M a {
+}
+
+/* delete */
+
+.update.delete a {
+    color: red;
+}
+
+/* create */
+
+.update.create a {
+    color: #00ff00;
+}
+
+/* patrol */
+
+.update.patrol a {
+    color: maroon;
+}
+
+/* move */
+
+.update.move a {
 }
 
 .wikistream {
