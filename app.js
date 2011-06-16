@@ -48,5 +48,4 @@ var wikipedia = redis.createClient();
 wikipedia.subscribe('wikipedia');
 wikipedia.on("message", function (channel, message) {
     socket.broadcast(message);
-    console.log("channel: " + channel + " ; message: " + message);
 });
