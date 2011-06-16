@@ -3,8 +3,7 @@
 var sys = require('sys'),
     redis = require('redis'),
     io = require('socket.io'),
-    express = require('express'),
-    spawn = require('child_process').spawn;
+    express = require('express');
 
 
 // set up the webapp
@@ -35,7 +34,7 @@ app.get('/', function(req, res){
 });
 
 app.listen(3000);
-app.setMaxListeners(50);
+app.setMaxListeners(200);
 
 
 // set up the update stream
