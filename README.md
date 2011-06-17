@@ -23,6 +23,11 @@ and point your browser at:
 
     http://localhost:3000/
 
+An upstart script is included, which you should be able to install and use:
+
+    cp wikistream.conf /etc/init/wikistream.conf
+    start wikistream
+
 Author: Ed Summers (ehs@pobox.com)
 
 License: Public Domain

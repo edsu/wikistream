@@ -33,7 +33,7 @@ app.get('/', function(req, res){
   });
 });
 
-app.setMaxListeners(100);
+app.setMaxListeners(300);
 app.listen(3000);
 
 
