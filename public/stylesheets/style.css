@@ -7,7 +7,7 @@ header {
   font-size: 24pt;
   margin-left: auto;
   margin-right: auto;
-  width: 400px;
+  width: 50%;
 }
 
 header img {
@@ -15,18 +15,41 @@ header img {
 }
 
 #about {
-    width: 20%;
-    height: 550px;
-    float: left;
-    margin-left: 10%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
     vertical-align: top;
 }
 
-#updates {
+#slider {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
     float: left;
-    margin-left: 10%;
+    width: 70%;
+}
+
+#deltaLimit {
+    border: 0;
+    color: gray;
+    font-weight: bold;
+}
+
+.deltaLabel {
+    font-weight: bold;
+    color: gray;
+    margin-left: 10px;
+}
+
+#updatePanel {
+    margin-left: auto;
+    margin-right: auto;
     height: 550px;
     width: 60%;
+}
+
+#updates {
+    clear: both;
 }
 
 .update a {
@@ -115,4 +138,10 @@ a {
 
 .lang.he {
     direction: rtl;
+}
+
+.delta {
+    margin-left: 10px;
+    font-size: smaller;
+    color: gray;
 }

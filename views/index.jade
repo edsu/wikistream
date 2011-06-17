@@ -5,37 +5,10 @@ header
 a(href="http://github.com/edsu/wikistream")
   img(style="position: absolute; top: 0; right: 0; border: 0;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
 
-div(id='about')
-  p
-    span(class='wikistream') wikistream 
-    span is an experimental visualization of realtime edits in major language 
-    a(href="http://wikipedia.org") Wikipedias. 
-    span Every time someone updates or creates a Wikipedia article you will see it ever so briefly in this list. 
-    
-  p Edits by bots are colored 
-    span(style="color: blue;") blue 
-    span and new pages are colored 
-    span(style="color: green;") green 
-    span . If you'd like to pause the display at any time just hit 'p'. To continue scrolling hit 'p' again. If you hover over the link you should see the comment associated with the change.
-
-
-  p 
-    span Hopefully 
-    span(class="wikistream") wikistream 
-    span provides a hint of just how active the community is around Wikipedia.  It's really important to recognize the level of involvement of folks around the world, who are actively engaged in making Wikipedia better.
-
-
-  p 
-    span(class='wikistream') wikistream 
-    span was built using node.js and redis.  node connects to the Wikimedia IRC server, joins the wikipedia channels and pushes updates into redis via pub/sub, which the node webapp is then able to deliver into your browser through the magic of 
-    a(href="http://socket.io") socket.io 
-    span If you are curious, want to add/suggest something, or run the app yourself, checkout the code on 
-    a(href="http://github.com/edsu/wikistream") GitHub
-
-  p
-    img(src="/images/redis.png", width=200)
-    br
-    img(src="/images/node.png", width=200)
-
-p
+div(id='updatePanel')
+  div(id="slider")
+  span(class="deltaLabel") Edit Size: ± 
+  span(id='deltaLimit') 0
   div(id='updates')
+
+

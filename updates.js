@@ -16,9 +16,11 @@ chans = ["#en.wikipedia", "#fr.wikipedia", "#es.wikipedia",
          "#sv.wikipedia", "#tr.wikipedia", "#uk.wikipedia",
          "#vi.wikipedia", "#vo.wikipedia", "#zh.wikipedia"];
 
+chans = ["#en.wikipedia"]
+
 var client = new irc({
     server: 'irc.wikimedia.org',
-    nick: 'wikistream',
+    nick: 'wikistream-dev',
     log: false,
     user: {
         username: 'wikistream-bot',
@@ -29,14 +31,18 @@ var client = new irc({
 // parse the mirc colored irc message
 
 function parse_msg(msg) {
-    m = /\x0314\[\[\x0307(.+?)\x0314\]\]\x034 (.*?)\x0310.*\x0302(http.+?)\x03.+\x0303(.+?)\x03.+\x0310(.+)\x03/.exec(msg[1]);
+    m = /\x0314\[\[\x0307(.+?)\x0314\]\]\x034 (.*?)\x0310.*\x0302(http.+?)\x03.+\x0303(.+?)\x03.+\x03 (.+) \x0310(.+)\x03/.exec(msg[1]);
     if (! m) { return null; } 
+
     lang = /\#(.+)\.wikipedia/.exec(msg[0])[1];
+    delta = parseInt(/([+-]\d+)/.exec(m[5])[1]);
+
     return {page: m[1], 
             flag: m[2], 
             url: m[3], 
             user: m[4], 
-            comment: m[5],
+            delta: delta,
+            comment: m[6],
             lang: lang}
 }
 
