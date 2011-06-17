@@ -99,3 +99,20 @@ a {
     font-size: smaller;
     font-weight: bold;
 }
+
+.lang.ar {
+    direction: rtl;
+    font-size: larger;
+}
+
+.lang.fa {
+    direction: rtl;
+}
+
+.lang.ur {
+    direction: rtl;
+}
+
+.lang.he {
+    direction: rtl;
+}
