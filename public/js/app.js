@@ -20,6 +20,18 @@ function init() {
 
     function toggle_pause() {
         pause = ! pause;
+        if (pause) {
+          $('header').block({ 
+              message: 'Paused<br/>Press \'p\' to unpause.', 
+              css: { border: 'none',
+                     color: '#fff',
+                     backgroundColor: 'transparent',
+                     width: '400px'
+              } 
+          });
+        } else {
+          $('header').unblock();
+        }
     }
 
     $(document).bind('keydown', 'p', toggle_pause);
