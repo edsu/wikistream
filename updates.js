@@ -16,11 +16,9 @@ chans = ["#en.wikipedia", "#fr.wikipedia", "#es.wikipedia",
          "#sv.wikipedia", "#tr.wikipedia", "#uk.wikipedia",
          "#vi.wikipedia", "#vo.wikipedia", "#zh.wikipedia"];
 
-chans = ["#en.wikipedia"]
-
 var client = new irc({
     server: 'irc.wikimedia.org',
-    nick: 'wikistream-dev',
+    nick: 'wikistream',
     log: false,
     user: {
         username: 'wikistream-bot',

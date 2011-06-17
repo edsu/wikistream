@@ -118,26 +118,25 @@ a {
 
 .lang {
     margin-right: 3px;
-    font-family: Courier;
+    font-family: Couri;
     font-size: smaller;
     font-weight: bold;
 }
 
 .lang.ar {
-    direction: rtl;
-    font-size: larger;
+    /*direction: rtl;*/
 }
 
 .lang.fa {
-    direction: rtl;
+    /*direction: rtl;*/
 }
 
 .lang.ur {
-    direction: rtl;
+    /*direction: rtl;*/
 }
 
 .lang.he {
-    direction: rtl;
+    /*direction: rtl;*/
 }
 
 .delta {
