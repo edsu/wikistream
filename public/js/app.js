@@ -23,10 +23,10 @@ function init() {
         if (pause) {
           $('header').block({ 
               message: 'Paused<br/>Press \'p\' to unpause.', 
-              css: { border: 'none',
-                     color: '#fff',
-                     backgroundColor: 'transparent',
-                     width: '400px'
+              css: {border: 'none',
+                    color: '#fff',
+                    backgroundColor: 'transparent',
+                    width: '400px'
               } 
           });
         } else {
