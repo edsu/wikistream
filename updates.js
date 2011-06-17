@@ -6,12 +6,20 @@ var irc = require('irc-js'),
 chans = ["#en.wikipedia", "#fr.wikipedia", "#es.wikipedia", 
          "#de.wikipedia", "#fi.wikipedia", "#ru.wikipedia",
          "#it.wikipedia", "#pt.wikipedia", "#nl.wikipedia",
-         "#pl.wikipedia", "#ja.wikipedia"];
+         "#pl.wikipedia", "#ja.wikipedia", "#ar.wikipedia",
+         "#bg.wikipedia", "#ca.wikipedia", "#cs.wikipedia",
+         "#da.wikipedia", "#eo.wikipedia", "#eu.wikipedia",
+         "#fa.wikipedia", "#ko.wikipedia", "#id.wikipedia",
+         "#he.wikipedia", "#lt.wikipedia", "#hu.wikipedia",
+         "#ms.wikipedia", "#no.wikipedia", "#ro.wikipedia",
+         "#sk.wikipedia", "#sl.wikipedia", "#sr.wikipedia",
+         "#sv.wikipedia", "#tr.wikipedia", "#uk.wikipedia",
+         "#vi.wikipedia", "#vo.wikipedia", "#zh.wikipedia"];
 
 var client = new irc({
     server: 'irc.wikimedia.org',
-    nick: 'wikistream',
-    log: false,
+    nick: 'wikistream2',
+    log: true,
     user: {
         username: 'wikistream-bot',
         realname: 'http://github.com/edsu/wikistream',

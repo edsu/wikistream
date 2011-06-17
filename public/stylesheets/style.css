@@ -92,3 +92,10 @@ header img {
 a {
     text-decoration: none;
 }
+
+.lang {
+    margin-right: 3px;
+    font-family: Courier;
+    font-size: smaller;
+    font-weight: bold;
+}
