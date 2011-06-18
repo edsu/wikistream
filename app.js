@@ -2,7 +2,7 @@
 
 var sys = require('sys'),
     redis = require('redis'),
-    io = require('socket.io'),
+    sio = require('socket.io'),
     express = require('express');
 
 
@@ -44,18 +44,8 @@ app.listen(3000);
 
 // set up the update stream
 
-var socket = io.listen(app);
+var socket = sio.listen(app);
 var wikipedia = redis.createClient();
-var listenerCount = 0;
-
-socket.on('connect', function(client) {
-    listenerCount += 1;
-    console.log(listenerCount + " - connect - " + client);
-    client.on('disconnect', function () {
-        listenerCount -= 1;
-        console.log(listenerCount + " - disconnect - " + client);
-    });
-});
 
 wikipedia.subscribe('wikipedia');
 wikipedia.on("message", function (channel, message) {
