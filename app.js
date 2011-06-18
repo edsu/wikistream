@@ -9,6 +9,7 @@ var sys = require('sys'),
 // set up the webapp
 
 var app = module.exports = express.createServer();
+var requestCount = 0;
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -28,9 +29,13 @@ app.configure('production', function(){
 });
 
 app.get('/', function(req, res){
+  requestCount += 1;
   res.render('index', {
     title: 'wikistream'
   });
+  console.log(requestCount + " - " + 
+              req.headers["x-forwarded-for"] + " - " + 
+              req.headers["user-agent"]);
 });
 
 app.setMaxListeners(300);
@@ -40,11 +45,18 @@ app.listen(3000);
 // set up the update stream
 
 var socket = io.listen(app);
+var wikipedia = redis.createClient();
+var listenerCount = 0;
+
 socket.on('connect', function(client) {
-    console.log(client);
+    listenerCount += 1;
+    console.log(listenerCount + " - connect - " + client);
+    client.on('disconnect', function () {
+        listenerCount -= 1;
+        console.log(listenerCount + " - disconnect - " + client);
+    });
 });
 
-var wikipedia = redis.createClient();
 wikipedia.subscribe('wikipedia');
 wikipedia.on("message", function (channel, message) {
     socket.broadcast(message);
