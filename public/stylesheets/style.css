@@ -7,7 +7,7 @@ header {
   font-size: 24pt;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 40%;
 }
 
 header img {
@@ -42,6 +42,7 @@ header img {
 }
 
 #updatePanel {
+    margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
     height: 550px;
@@ -124,19 +125,19 @@ a {
 }
 
 .lang.ar {
-    /*direction: rtl;*/
+    direction: rtl;
 }
 
 .lang.fa {
-    /*direction: rtl;*/
+    direction: rtl;
 }
 
 .lang.ur {
-    /*direction: rtl;*/
+    direction: rtl;
 }
 
 .lang.he {
-    /*direction: rtl;*/
+    direction: rtl;
 }
 
 .delta {
