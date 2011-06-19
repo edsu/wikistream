@@ -31,3 +31,5 @@ An upstart script is included, which you should be able to install and use:
 Author: Ed Summers (ehs@pobox.com)
 
 License: Public Domain
+
+John
