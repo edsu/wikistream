@@ -64,11 +64,12 @@ function setupSlider() {
 function userIcon(msg) {
     if (msg.flag === "MB" || msg.flag === "B") {
         return $("<img>").attr({"src": "/images/robot.png",
-                                "class": "bot",
                                 "title": "Bot: " + msg.user})
+    } else if (msg.user.match(/\d+\.\d+\.\d+\.\d+/)) {
+        return $("<img>").attr({"src": "/images/question.png",
+                                "title": "Anonymous: " + msg.user});
     } else {
         return $("<img>").attr({"src": "/images/person.png",
-                                "class": "person",
                                 "title": "User: " + msg.user});
     }
 }
