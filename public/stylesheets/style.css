@@ -58,6 +58,10 @@ header img {
     color: black;
 }
 
+.update {
+    vertical-align: top;
+}
+
 .update img {
     margin-right: 3px;
     overflow: auto;
@@ -117,8 +121,7 @@ a {
 
 .lang {
     margin-right: 10px;
-    font-family: Couri;
-    font-size: smaller;
+    font-family: Courier;
     font-weight: bold;
 }
 
@@ -142,4 +145,10 @@ a {
     margin-left: 10px;
     font-size: smaller;
     color: gray;
+}
+
+img.robot {
+}
+
+img.person {
 }

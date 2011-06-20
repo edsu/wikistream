@@ -63,10 +63,12 @@ function setupSlider() {
 
 function userIcon(msg) {
     if (msg.flag === "MB" || msg.flag === "B") {
-        return $("<img>").attr({src: "/images/robot.png",
-                                title: "Bot: " + msg.user})
+        return $("<img>").attr({"src": "/images/robot.png",
+                                "class": "bot",
+                                "title": "Bot: " + msg.user})
     } else {
-        return $("<img>").attr({src: "/images/person.png",
-                                title: "User: " + msg.user});
+        return $("<img>").attr({"src": "/images/person.png",
+                                "class": "person",
+                                "title": "User: " + msg.user});
     }
 }
