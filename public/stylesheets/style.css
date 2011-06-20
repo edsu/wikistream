@@ -80,7 +80,7 @@ header img {
 /* N = New */
 
 .update.N a {
-    color: green;
+    font-weight: bold;
 }
 
 /* M = Minor */
