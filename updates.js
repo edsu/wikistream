@@ -1,28 +1,18 @@
-var irc = require('irc-js'),
+var fs = require('fs'),
+    irc = require('irc-js'),
     redis = require('redis');
 
-// connect to the wikipedia updates irc channel
+// get configuration
 
-chans = ["#en.wikipedia", "#fr.wikipedia", "#es.wikipedia", 
-         "#de.wikipedia", "#fi.wikipedia", "#ru.wikipedia",
-         "#it.wikipedia", "#pt.wikipedia", "#nl.wikipedia",
-         "#pl.wikipedia", "#ja.wikipedia", "#ar.wikipedia",
-         "#bg.wikipedia", "#ca.wikipedia", "#cs.wikipedia",
-         "#da.wikipedia", "#eo.wikipedia", "#eu.wikipedia",
-         "#fa.wikipedia", "#ko.wikipedia", "#id.wikipedia",
-         "#he.wikipedia", "#lt.wikipedia", "#hu.wikipedia",
-         "#ms.wikipedia", "#no.wikipedia", "#ro.wikipedia",
-         "#sk.wikipedia", "#sl.wikipedia", "#sr.wikipedia",
-         "#sv.wikipedia", "#tr.wikipedia", "#uk.wikipedia",
-         "#vi.wikipedia", "#vo.wikipedia", "#zh.wikipedia"];
+config = JSON.parse(fs.readFileSync('config.json'))
 
 var client = new irc({
     server: 'irc.wikimedia.org',
-    nick: 'wikistream',
-    log: false,
+    nick: config.ircNick,
+    log: config.log,
     user: {
-        username: 'wikistream-bot',
-        realname: 'http://github.com/edsu/wikistream',
+        username: config.ircUserName,
+        realname: config.ircRealName
     }
 })
 
@@ -49,7 +39,7 @@ function parse_msg(msg) {
 
 db = redis.createClient();
 client.connect(function () {
-    client.join(chans);
+    client.join(config.channels);
     client.on("privmsg", function (msg) {
         m = parse_msg(msg.params);
         if (m) {

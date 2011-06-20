@@ -10,6 +10,14 @@ Installation:
 * install [npm](http://npmjs.org/)
 * npm install
 
+Next you'll want to use and/or adjust the default configuration:
+
+    cp config.json.example config.json
+
+You may want to adjust the ircNick that is in the example to something unique,
+so that you will be able to join the channels without a collision. Also you 
+can adjust the wkipedia language channels that are being monitored.
+
 To run the app you'll first need to fetch wikipedia updates from IRC and 
 feed them to redis:
 
