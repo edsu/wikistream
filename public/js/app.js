@@ -17,6 +17,7 @@ function init() {
         var a = $("<a>").attr({href: msg.url, title: msg.comment, target: '_new'}).text(msg.page);
         var delta = $("<span>").attr({"class": "delta"}).text(msg.delta);
         var d = $("<div>").attr({"class": "update " + msg.flag})
+            .append(userIcon(msg))
             .append(lang)
             .append(a)
             .append(delta)
@@ -58,4 +59,14 @@ function setupSlider() {
             $("#deltaLimit").text(ui.value);
         }
     });
+}
+
+function userIcon(msg) {
+    if (msg.flag === "MB" || msg.flag === "B") {
+        return $("<img>").attr({src: "/images/robot.png",
+                                title: "Bot: " + msg.user})
+    } else {
+        return $("<img>").attr({src: "/images/person.png",
+                                title: "User: " + msg.user});
+    }
 }
