@@ -8,7 +8,7 @@
       "redis": "0.6.x",
       "coloured": "0.2.x",
       "irc-js": "0.2.x",
-      "log": "0.2.x",
+      "log": "1.2.x",
       "socket.io": "0.6.x"
   }
 }
