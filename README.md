@@ -41,7 +41,7 @@ installed node and checked out the wikistream code.
     cp wikistream-irc.conf /etc/init/wikistream-irc.conf
     start wikistream-irc
 
-The icons were created by Delphine Ménard, and separately available at:
+The icons were created by Delphine Ménard, and are separately available at:
 
 * http://commons.wikimedia.org/wiki/File:Unisex_user_icon.svg
 * http://commons.wikimedia.org/wiki/File:Icon_robot.svg
