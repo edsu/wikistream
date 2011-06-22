@@ -7,11 +7,13 @@ header {
   font-size: 24pt;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
   width: 40%;
 }
 
 header img {
     vertical-align: middle;
+    margin-right: 15px;
 }
 
 #about {
@@ -21,24 +23,37 @@ header img {
     vertical-align: top;
 }
 
-#slider {
-    margin-left: auto;
-    margin-right: auto;
+#controls {
     margin-bottom: 10px;
+    background-color: #eeeeee;
+    font-weight: bold;
+    color: gray;
+    width: 100%;
+    padding: 3px;
+}
+
+#wikis {
+    font-weight: bold;
+    color: gray;
     float: left;
-    width: 70%;
+} 
+
+#slider {
+    width: 75px;
+    float: left;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+#deltaControl {
+    width: 200px;
+}
+
+#deltaLabel {
+    margin-left: 5px;
 }
 
 #deltaLimit {
-    border: 0;
-    color: gray;
-    font-weight: bold;
-}
-
-.deltaLabel {
-    font-weight: bold;
-    color: gray;
-    margin-left: 10px;
 }
 
 #updatePanel {
@@ -141,14 +156,13 @@ a {
     direction: rtl;
 }
 
-.delta {
-    margin-left: 10px;
-    font-size: smaller;
-    color: gray;
-}
-
 img.robot {
 }
 
 img.person {
+}
+
+.delta {
+    color: gray;
+    font-size: smaller;
 }

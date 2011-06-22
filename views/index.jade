@@ -1,14 +1,28 @@
-header 
+header
   img(src="/images/wikipedia.png")
   span(class='wikistream') wikistream
 
 a(href="http://github.com/edsu/wikistream")
   img(style="position: absolute; top: 0; right: 0; border: 0;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
 
-div(id='updatePanel')
-  div(id="slider")
-  span(class="deltaLabel") Edit Size: ± 
-  span(id='deltaLimit') 0
+div(id="updatePanel")
+  table(id="controls")
+    tr
+      td Filters:
+      td
+        select(name="wikis")
+          option(value="all") All Wikpedias
+          - for (var i in wikisSorted)
+            option(value="#{wikisSorted[i]}")= wikis[wikisSorted[i]].long
+      td 
+        input(type="checkbox", name="person", checked="true")
+        img(src="/images/person.png", title="Wikipedia User")
+        input(type="checkbox", name="robot", checked="true")
+        img(src="/images/robot.png", title="Wikipedia Robot")
+        input(type="checkbox", name="anonymous", checked="true")
+        img(src="/images/question.png", title="Anonymous User")
+      td(id="deltaControl")
+        span(id="slider")
+        span(id="deltaLabel") Edit Size: ± 
+        span(id="deltaLimit") 0
   div(id='updates')
-
-

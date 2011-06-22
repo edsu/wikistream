@@ -1,20 +1,152 @@
 {
-    "ircNick": "wikistream",
-    "ircUserName": "wikistream-bot",
-    "ircRealName": "http://github.com/edsu/wikistream",
-    "channels": [
-        "#en.wikipedia", "#fr.wikipedia", "#es.wikipedia", 
-        "#de.wikipedia", "#fi.wikipedia", "#ru.wikipedia",
-        "#it.wikipedia", "#pt.wikipedia", "#nl.wikipedia",
-        "#pl.wikipedia", "#ja.wikipedia", "#ar.wikipedia",
-        "#bg.wikipedia", "#ca.wikipedia", "#cs.wikipedia",
-        "#da.wikipedia", "#eo.wikipedia", "#eu.wikipedia",
-        "#fa.wikipedia", "#ko.wikipedia", "#id.wikipedia",
-        "#he.wikipedia", "#lt.wikipedia", "#hu.wikipedia",
-        "#ms.wikipedia", "#no.wikipedia", "#ro.wikipedia",
-        "#sk.wikipedia", "#sl.wikipedia", "#sr.wikipedia",
-        "#sv.wikipedia", "#tr.wikipedia", "#uk.wikipedia",
-        "#vi.wikipedia", "#vo.wikipedia", "#zh.wikipedia"
-    ],
-    "log": false
+  "ircNick": "wikistream",
+  "ircUserName": "wikistream-bot",
+  "ircRealName": "http://github.com/edsu/wikistream",
+  "log": false,
+  "wikipedias": {
+    "#vo.wikipedia": {
+      "short": "vo", 
+      "long": "Volap\u00fck Wikipedia"
+    }, 
+    "#lt.wikipedia": {
+      "short": "lt", 
+      "long": "Lithuanian Wikipedia"
+    }, 
+    "#id.wikipedia": {
+      "short": "id", 
+      "long": "Indonesian Wikipedia"
+    }, 
+    "#sv.wikipedia": {
+      "short": "sv", 
+      "long": "Swedish Wikipedia"
+    }, 
+    "#de.wikipedia": {
+      "short": "de", 
+      "long": "German Wikipedia"
+    }, 
+    "#uk.wikipedia": {
+      "short": "uk", 
+      "long": "Ukrainian Wikipedia"
+    }, 
+    "#eo.wikipedia": {
+      "short": "eo", 
+      "long": "Esperanto Wikipedia"
+    }, 
+    "#ar.wikipedia": {
+      "short": "ar", 
+      "long": "Arabic Wikipedia"
+    }, 
+    "#tr.wikipedia": {
+      "short": "tr", 
+      "long": "Turkish Wikipedia"
+    }, 
+    "#he.wikipedia": {
+      "short": "he", 
+      "long": "Hebrew Wikipedia"
+    }, 
+    "#sr.wikipedia": {
+      "short": "sr", 
+      "long": "Serbian Wikipedia"
+    }, 
+    "#ru.wikipedia": {
+      "short": "ru", 
+      "long": "Russian Wikipedia"
+    }, 
+    "#fi.wikipedia": {
+      "short": "fi", 
+      "long": "Finnish Wikipedia"
+    }, 
+    "#vi.wikipedia": {
+      "short": "vi", 
+      "long": "Vietnamese Wikipedia"
+    }, 
+    "#eu.wikipedia": {
+      "short": "eu", 
+      "long": "Euskara Wikipedia"
+    }, 
+    "#sl.wikipedia": {
+      "short": "sl", 
+      "long": "Solvenian Wikipedia"
+    }, 
+    "#nl.wikipedia": {
+      "short": "nl", 
+      "long": "Netherlands Wikipedia"
+    }, 
+    "#pl.wikipedia": {
+      "short": "pl", 
+      "long": "Polish Wikipedia"
+    }, 
+    "#ca.wikipedia": {
+      "short": "ca", 
+      "long": "Canadian Wikipedia"
+    }, 
+    "#cs.wikipedia": {
+      "short": "cs", 
+      "long": "Czech Wikipedia"
+    }, 
+    "#ms.wikipedia": {
+      "short": "ms", 
+      "long": "Malaysian Wikipedia"
+    }, 
+    "#pt.wikipedia": {
+      "short": "pt", 
+      "long": "Portuguese Wikipedia"
+    }, 
+    "#ro.wikipedia": {
+      "short": "ro", 
+      "long": "Romanian Wikipedia"
+    }, 
+    "#it.wikipedia": {
+      "short": "it", 
+      "long": "Italian Wikipedia"
+    }, 
+    "#sk.wikipedia": {
+      "short": "sk", 
+      "long": "Slovak Wikipedia"
+    }, 
+    "#ko.wikipedia": {
+      "short": "ko", 
+      "long": "Korean Wikipedia"
+    }, 
+    "#no.wikipedia": {
+      "short": "no", 
+      "long": "Norwegian Wikipedia"
+    }, 
+    "#es.wikipedia": {
+      "short": "es", 
+      "long": "Spanish Wikipedia"
+    }, 
+    "#hu.wikipedia": {
+      "short": "hu", 
+      "long": "Hungarian Wikipedia"
+    }, 
+    "#fa.wikipedia": {
+      "short": "fa", 
+      "long": "Farsi Wikipedia"
+    }, 
+    "#zh.wikipedia": {
+      "short": "zh", 
+      "long": "Chinese Wikipedia"
+    }, 
+    "#fr.wikipedia": {
+      "short": "fr", 
+      "long": "French Wikipedia"
+    }, 
+    "#ja.wikipedia": {
+      "short": "ja", 
+      "long": "Japanese Wikipedia"
+    }, 
+    "#bg.wikipedia": {
+      "short": "bg", 
+      "long": "Bulgarian Wikipedia"
+    }, 
+    "#en.wikipedia": {
+      "short": "en", 
+      "long": "English Wikipedia"
+    }, 
+    "#da.wikipedia": {
+      "short": "da", 
+      "long": "Danish Wikipedia"
+    }
+  }
 }

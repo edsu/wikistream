@@ -1,15 +1,23 @@
 // imports
 
-var sys = require('sys'),
+var fs = require('fs'),
+    sys = require('sys'),
     redis = require('redis'),
     sio = require('socket.io'),
     express = require('express');
 
 
-// set up the webapp
+// get the configuration
 
+var config = JSON.parse(fs.readFileSync('config.json'));
 var app = module.exports = express.createServer();
 var requestCount = 0;
+var wikisSorted = [];
+for (var chan in config.wikipedias) wikisSorted.push(chan);
+wikisSorted.sort();
+
+
+// set up the web app
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -31,18 +39,19 @@ app.configure('production', function(){
 app.get('/', function(req, res){
   requestCount += 1;
   res.render('index', {
-    title: 'wikistream'
+    title: 'wikistream',
+    wikis: config.wikipedias,
+    wikisSorted: wikisSorted
   });
   console.log(requestCount + " - " + 
               req.headers["x-forwarded-for"] + " - " + 
               req.headers["user-agent"]);
 });
 
-app.setMaxListeners(300);
 app.listen(3000);
 
 
-// set up the update stream
+// set up the socket.io update stream
 
 var socket = sio.listen(app);
 var wikipedia = redis.createClient();
