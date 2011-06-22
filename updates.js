@@ -1,11 +1,12 @@
 var fs = require('fs'),
-  irc = require('irc-js'),
-  redis = require('redis');
+    path = require('path'),
+    irc = require('irc-js'),
+    redis = require('redis');
 
 
 // get configuration
-
-config = JSON.parse(fs.readFileSync('config.json'))
+configFile = path.join(__dirname, 'config.json');
+config = JSON.parse(fs.readFileSync(configFile))
 
 var client = new irc({
   server: 'irc.wikimedia.org',

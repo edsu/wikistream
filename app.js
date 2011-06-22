@@ -2,6 +2,7 @@
 
 var fs = require('fs'),
     sys = require('sys'),
+    path = require('path'),
     redis = require('redis'),
     sio = require('socket.io'),
     express = require('express');
@@ -9,7 +10,8 @@ var fs = require('fs'),
 
 // get the configuration
 
-var config = JSON.parse(fs.readFileSync('config.json'));
+var configPath = path.join(__dirname, "config.json");
+var config = JSON.parse(fs.readFileSync(configPath));
 var app = module.exports = express.createServer();
 var requestCount = 0;
 var wikisSorted = [];
