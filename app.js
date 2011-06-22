@@ -21,7 +21,11 @@ var requestCount = 0;
 var wikisSorted = [];
 for (var chan in config.wikipedias) wikisSorted.push(chan);
 wikisSorted.sort(function(a, b) {
-  return config.wikipedias[a].long > config.wikipedias[b].long;
+  w1 = config.wikipedias[a].long;
+  w2 = config.wikipedias[b].long;
+  if (w1 == w2) return 0;
+  else if (w1 < w2) return -1;
+  else if (w1 > w2) return 1;
 });
 
 
