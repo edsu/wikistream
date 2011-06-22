@@ -6,7 +6,7 @@ body {
 header {
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
+  width: 350px;
   font-family: 'Slackey';
   padding-bottom: 10px;
 }
@@ -35,10 +35,10 @@ header img {
 
 #controls {
     margin-bottom: 10px;
-    background-color: #eeeeee;
+    border: thin #eeeeee solid;
     font-weight: bold;
     color: gray;
-    width: 100%;
+    width: 700px;
     padding: 3px;
 }
 
@@ -56,7 +56,7 @@ header img {
 }
 
 #deltaControl {
-    width: 255px;
+    width: 270px;
 }
 
 #deltaLabel {

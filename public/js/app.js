@@ -60,15 +60,22 @@ function togglePause() {
 
 function userIcon(msg) {
   t = userType(msg);
+
+  // construct a link for the user profile
+  wikipediaHost = msg.wikipedia.replace('#', '') + '.org'
+  userLink= $("<a>").attr({
+    'href': 'http://' + wikipediaHost + '/wiki/User:' + msg.user,
+    'target': '_new',
+  });
+
   if (t == "robot") {
-    return $('<img>').attr({'src': '/images/robot.png',
-             'title': 'Bot: ' + msg.user})
+    return userLink.append($('<img>').attr({'src': '/images/robot.png',
+             'title': 'Bot: ' + msg.user}));
   } else if (t == "anonymous") {
     return $('<img>').attr({'src': '/images/question.png',
              'title': 'Anonymous: ' + msg.user});
   } else {
-    return $('<img>').attr({'src': '/images/person.png',
-             'title': 'User: ' + msg.user});
+    return userLink.append($('<img>').attr({'src': '/images/person.png', 'title': 'User: ' + msg.user}));
   }
 }
 
