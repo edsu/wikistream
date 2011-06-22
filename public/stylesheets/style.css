@@ -4,16 +4,25 @@ body {
 }
 
 header {
-  font-size: 24pt;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
   width: 40%;
+  font-family: 'Slackey';
+  padding-bottom: 10px;
+}
+
+header span.wikistream {
+  font-size: 20pt;
+}
+
+header span.pauseInfo {
+    font-size: 9pt;
 }
 
 header img {
     vertical-align: middle;
     margin-right: 15px;
+    float: left;
 }
 
 #about {
@@ -61,7 +70,7 @@ header img {
     margin-left: auto;
     margin-right: auto;
     height: 800px;
-    width: 60%;
+    width: 55%;
 }
 
 #updates {
@@ -124,10 +133,6 @@ header img {
 /* move */
 
 .update.move a {
-}
-
-.wikistream {
-    font-family: 'Slackey';
 }
 
 a {

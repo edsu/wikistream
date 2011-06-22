@@ -36,6 +36,9 @@ An upstart script is included, which you should be able to install and use:
     cp wikistream.conf /etc/init/wikistream.conf
     start wikistream
 
+    cp wikistream-irc.conf /etc/init/wikistream-irc.conf
+    start wikistream-irc
+
 Author: Ed Summers (ehs@pobox.com)
 
 License: Public Domain

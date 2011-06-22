@@ -20,6 +20,7 @@ function init() {
     if (! userFilter(msg)) return;
     if (Math.abs(msg.delta) < deltaLimit) return;
 
+    // add the new update
     var lang = $('<span>').attr({'class': 'lang'}).text('[' + msg.wikipediaShort + ']');
     var a = $('<a>').attr({'class': 'page', 'href': msg.url, 'title': msg.comment, target: '_new'}).text(msg.page);
     var delta = $('<span>').attr({'class': 'delta'}).text(msg.delta);
@@ -30,8 +31,11 @@ function init() {
       .append(delta)
       .hide();
     $('#updates').prepend(d);
-    d.slideDown('fast');
-    $('.update').slice(30).detach();
+    d.slideDown('medium');
+
+    // remove older updates
+    var old = $('.update').slice(30)
+    old.fadeOut('fast', function() { old.detach(); });
   });
 
   setupControls();
@@ -42,7 +46,7 @@ function togglePause() {
   pause = ! pause;
   if (pause) {
     $('header').block({ 
-      message: 'Paused<br/>Press \'p\' to unpause.', 
+      message: 'Paused<br/>Press \'p\' to unpause', 
       css: {border: 'none',
         color: '#fff',
         backgroundColor: 'transparent',
