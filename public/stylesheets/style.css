@@ -60,7 +60,7 @@ header img {
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
-    height: 775px;
+    height: 800px;
     width: 60%;
 }
 
@@ -164,5 +164,9 @@ img.person {
 
 .delta {
     color: gray;
-    font-size: smaller;
+    font-size: 8pt;
+}
+
+a.page {
+    margin-right: 15px;
 }
