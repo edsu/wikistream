@@ -13,7 +13,7 @@ div(id="updatePanel")
       td Filters:
       td
         select(name="wikis")
-          option(value="all") All Wikpedias
+          option(value="all") All Wikipedias
           - for (var i in wikisSorted)
             option(value="#{wikisSorted[i]}")= wikis[wikisSorted[i]].long
       td 
@@ -25,7 +25,7 @@ div(id="updatePanel")
         img(src="/images/question.png", title="Anonymous User")
       td(id="deltaControl")
         span(id="slider")
-        span(id="deltaLabel") Edit Size: ± 
+        span(id="deltaLabel") Edit Size (Chars): ± 
         span(id="deltaLimit") 0
         
   div(id='updates')

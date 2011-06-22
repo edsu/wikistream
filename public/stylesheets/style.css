@@ -25,11 +25,12 @@ header img {
     float: left;
 }
 
-#about {
-    width: 80%;
+#updatePanel {
+    margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
-    vertical-align: top;
+    height: 800px;
+    width: 55%;
 }
 
 #controls {
@@ -55,7 +56,7 @@ header img {
 }
 
 #deltaControl {
-    width: 200px;
+    width: 255px;
 }
 
 #deltaLabel {
@@ -63,14 +64,6 @@ header img {
 }
 
 #deltaLimit {
-}
-
-#updatePanel {
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 800px;
-    width: 55%;
 }
 
 #updates {
