@@ -74,7 +74,7 @@ client.connect(function () {
     if (m) {
       db.zincrby("flag", 1, m.flag);
       db.publish("wikipedia", JSON.stringify(m));
-      console.log(m);
+      console.log(m.page);
     }
   });
 });
