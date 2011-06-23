@@ -8,9 +8,9 @@ var includeUsers = true;
 var includeAnonymous = true;
 
 function init() {
+  setupControls();
   var socket = new io.Socket();
   socket.connect();
-
   socket.on('message', function(data) {
     var msg = jQuery.parseJSON(data);
 
@@ -20,26 +20,35 @@ function init() {
     if (! userFilter(msg)) return;
     if (Math.abs(msg.delta) < deltaLimit) return;
 
-    // add the new update
-    var lang = $('<span>').attr({'class': 'lang'}).text('[' + msg.wikipediaShort + ']');
-    var a = $('<a>').attr({'class': 'page', 'href': msg.url, 'title': msg.comment, target: '_new'}).text(msg.page);
-    var delta = $('<span>').attr({'class': 'delta'}).text(msg.delta);
-    var d = $('<div>').attr({'class': 'update ' + msg.flag})
-      .append(userIcon(msg))
-      .append(lang)
-      .append(a)
-      .append(delta)
-      .hide();
-    $('#updates').prepend(d);
-    d.slideDown('medium');
-
-    // remove older updates
-    var old = $('.update').slice(30)
-    old.fadeOut('fast', function() { old.detach(); });
+    // update the stream
+    addUpdate(msg);
+    removeOld();
   });
+}
 
-  setupControls();
-  $(document).bind('keydown', 'p', togglePause);
+function addUpdate(msg) {
+  var lang = $('<span>').attr({'class': 'lang'}).text('[' + msg.wikipediaShort + ']');
+  var a = $('<a>').attr({'class': 'page', 'href': msg.url, 'title': msg.comment, target: '_new'}).text(msg.page);
+  var delta = $('<span>').attr({'class': 'delta'}).text(msg.delta);
+
+  updateClasses = ['update'];
+  if (msg.newPage) updateClasses.push('newPage');
+  if (msg.unpatrolled) updateClasses.push('unpatrolled');
+
+  var d = $('<div>').attr({'class': updateClasses.join(' ')})
+    .append(userIcon(msg))
+    .append(lang)
+    .append(a)
+    .append(delta)
+    .hide();
+  $('#updates').prepend(d);
+  d.slideDown('medium');
+}
+
+function removeOld() {
+  // remove the old stuff
+  var old = $('.update').slice(30)
+  old.fadeOut('fast', function() { old.detach(); });
 }
 
 function togglePause() {
@@ -59,45 +68,28 @@ function togglePause() {
 }
 
 function userIcon(msg) {
-  t = userType(msg);
-
-  // construct a link for the user profile
+  // construct a link to the user profile
   wikipediaHost = msg.wikipedia.replace('#', '') + '.org'
   userLink= $("<a>").attr({
     'href': 'http://' + wikipediaHost + '/wiki/User:' + msg.user,
     'target': '_new',
   });
 
-  if (t == "robot") {
-    return userLink.append($('<img>').attr({'src': '/images/robot.png',
-             'title': 'Bot: ' + msg.user}));
-  } else if (t == "anonymous") {
-    return $('<img>').attr({'src': '/images/question.png',
-             'title': 'Anonymous: ' + msg.user});
+  var src = title = null;
+  if (msg.robot) {
+    src = '/images/robot.png';
+    title = 'Bot: ';
+  } else if (msg.anonymous) {
+    src = '/images/question.png';
+    title = 'Anonymous: ';
   } else {
-    return userLink.append($('<img>').attr({'src': '/images/person.png', 'title': 'User: ' + msg.user}));
+    src = '/images/person.png';
+    title = 'User: ';
   }
+  return userLink.append($("<img>").attr({src: src, title: title + msg.user}));
 }
 
 function setupControls() {
-  setupSlider();
-  $('select[name="wikis"]').change(function() {
-    wikipediaLimit = ($('select[name="wikis"]').val());
-  });
-  $('input[type="checkbox"]').change(function() {
-    var userType = $(this).attr("name");
-    var checked = $(this).attr("checked");
-    if (userType == "user") {
-      includeUsers = checked;
-    } else if (userType == "robot") {
-      includeRobots = checked;
-    } else if (userType == "anonymous") {
-      includeAnonymous = checked;
-    }
-  });
-}
-
-function setupSlider() {
   $('#slider').slider({
     range: 'min',
     value: 0,
@@ -109,6 +101,24 @@ function setupSlider() {
       $('#deltaLimit').text(ui.value);
     }
   });
+
+  $('select[name="wikis"]').change(function() {
+    wikipediaLimit = ($('select[name="wikis"]').val());
+  });
+
+  $('input[type="checkbox"]').change(function() {
+    var userType = $(this).attr("name");
+    var checked = $(this).attr("checked");
+    if (userType == "user") {
+      includeUsers = checked;
+    } else if (userType == "robot") {
+      includeRobots = checked;
+    } else if (userType == "anonymous") {
+      includeAnonymous = checked;
+    }
+  });
+
+  $(document).bind('keydown', 'p', togglePause);
 }
 
 function wikipediaFilter(msg) {
@@ -118,23 +128,12 @@ function wikipediaFilter(msg) {
 }
 
 function userFilter(msg) {
-    t = userType(msg);
-    if (! includeRobots && t == "robot") {
+    if (! includeRobots && msg.robot) {
         return false;
-    } else if (! includeAnonymous && t == "anonymous") {
+    } else if (! includeAnonymous && msg.anonymous) {
         return false;
-    } else if (! includeUsers && t == "user") {
+    } else if (! includeUsers && (! msg.anonymous && ! msg.robot)) {
         return false;
     }
     return true;
-}
-
-function userType(msg) {
-  if (msg.flag === 'MB' || msg.flag === 'B') {
-      return "robot";
-  } else if (msg.user.match(/\d+\.\d+\.\d+\.\d+/)) {
-    return "anonymous";
-  } else {
-    return "user";
-  }
 }

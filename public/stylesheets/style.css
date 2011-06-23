@@ -3,6 +3,10 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 header {
   margin-left: auto;
   margin-right: auto;
@@ -84,52 +88,12 @@ header img {
     overflow: auto;
 }
 
-/* MB = Minor Bot */
-
-.update.MB a {
+.update.newPage a {
+    color: green;
 }
 
-/* B = Bot */
-
-.update.B a {
-}
-
-/* N = New */
-
-.update.N a {
-    font-weight: bold;
-}
-
-/* M = Minor */
-
-.update.M a {
-}
-
-/* delete */
-
-.update.delete a {
+.update.unpatrolled a {
     color: red;
-}
-
-/* create */
-
-.update.create a {
-    color: #00ff00;
-}
-
-/* patrol */
-
-.update.patrol a {
-    color: maroon;
-}
-
-/* move */
-
-.update.move a {
-}
-
-a {
-    text-decoration: none;
 }
 
 .lang {
@@ -152,12 +116,6 @@ a {
 
 .lang.he {
     direction: rtl;
-}
-
-img.robot {
-}
-
-img.person {
 }
 
 .delta {
