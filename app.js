@@ -14,9 +14,19 @@ var configPath = path.join(__dirname, "config.json");
 var config = JSON.parse(fs.readFileSync(configPath));
 var app = module.exports = express.createServer();
 var requestCount = 0;
+
+
+// get the wikipedia shortnames sorted by their longname
+
 var wikisSorted = [];
 for (var chan in config.wikipedias) wikisSorted.push(chan);
-wikisSorted.sort();
+wikisSorted.sort(function(a, b) {
+  w1 = config.wikipedias[a].long;
+  w2 = config.wikipedias[b].long;
+  if (w1 == w2) return 0;
+  else if (w1 < w2) return -1;
+  else if (w1 > w2) return 1;
+});
 
 
 // set up the web app
