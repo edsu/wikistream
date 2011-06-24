@@ -70,19 +70,19 @@ app.get('/', function(req, res){
 });
 
 app.get('/users-daily.json', function(req, res){
-  stats.zrevrange(['users-daily', 0, 50, 'withscores'], function (e, r) {
+  stats.zrevrange(['users-daily', 0, 5, 'withscores'], function (e, r) {
     res.send(zresults(r));
   });
 });
 
 app.get('/pages-daily.json', function(req, res){
-  stats.zrevrange(['pages-daily', 0, 50, 'withscores'], function (e, r) {
+  stats.zrevrange(['pages-daily', 0, 5, 'withscores'], function (e, r) {
     res.send(zresults(r));
   });
 });
 
 app.get('/robots-daily.json', function(req, res){
-  stats.zrevrange(['robots-daily', 0, 50, 'withscores'], function (e, r) {
+  stats.zrevrange(['robots-daily', 0, 5, 'withscores'], function (e, r) {
     res.send(zresults(r));
   });
 });

@@ -84,13 +84,14 @@ function processMessage (msg) {
 
 function stats (msg) {
   redis.zincrby('pages-daily', 1, JSON.stringify(
-    {'page': msg.page, 'pageUrl': msg.pageUrl}));
+    {name: msg.page, 'url': msg.url, 'wikipedia': msg.wikipediaShort}));
+  redis.zincrby('wikipedias-daily', 1, msg.wikipedia);
   if (msg.robot) {
     redis.zincrby('robots-daily', 1, JSON.stringify(
-    {user: msg.user, url: msg.userUrl}));
+    {name: msg.user, url: msg.userUrl, 'wikipedia': msg.wikipediaShort}));
   } else {
     redis.zincrby('users-daily', 1, JSON.stringify(
-      {user: msg.user, url: msg.userUrl}));
+      {name: msg.user, url: msg.userUrl, 'wikipedia': msg.wikipediaShort}));
   }
 }
 
@@ -108,6 +109,7 @@ function resetStats () {
   redis.del('pages-daily');
   redis.del('robots-daily');
   redis.del('users-daily');
+  redis.del('wikipedias-daily');
   setStatsTimeout();
 }
 

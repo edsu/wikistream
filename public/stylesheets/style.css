@@ -32,9 +32,10 @@ header img {
 #updatePanel {
     margin-top: 10px;
     margin-left: auto;
-    margin-right: auto;
     height: 850px;
-    width: 55%;
+    width: 650px;
+    float: left;
+    border: thin #eeeeee solid;
 }
 
 #controls {
@@ -42,7 +43,7 @@ header img {
     border: thin #eeeeee solid;
     font-weight: bold;
     color: gray;
-    width: 700px;
+    width: 100%;
     padding: 3px;
 }
 
@@ -125,4 +126,27 @@ header img {
 
 a.page {
     margin-right: 15px;
+}
+
+#stats {
+  width: 30%;
+  margin-left: 700px;
+  margin-right: auto;
+}
+
+.statsPanel {
+    border: thin #eeeeee solid;
+    padding: 10px;
+    height: 200px;
+    width: 300px;
+    overflow: auto;
+}
+
+#usersDaily {
+}
+
+#robotsDaily {
+}
+
+#pagesdDaily {
 }

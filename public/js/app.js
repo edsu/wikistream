@@ -24,6 +24,7 @@ function init() {
     addUpdate(msg);
     removeOld();
   });
+  stats();
 }
 
 function addUpdate(msg) {
@@ -136,4 +137,23 @@ function userFilter(msg) {
         return false;
     }
     return true;
+}
+
+function stats() {
+    panels = [
+        {url: '/pages-daily.json', divId: '#pagesDaily'},
+        {url: '/users-daily.json', divId: '#usersDaily'},
+        {url: '/robots-daily.json', divId: '#robotsDaily'}
+    ];
+
+    for (var i in panels) {
+        $.getJSON(panels[i].url, function (d) {
+            for (var j in d) {
+                var s = d[j];
+                alert(i);
+                var p = $(panels[i].divId);
+                p.append($('<div>').append($('<a>').attr({href: s.url}).text(s.name + " (" + s.score + ")")))
+            }
+        });
+    }
 }
