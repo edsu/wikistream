@@ -3,10 +3,23 @@
 var fs = require('fs'),
     sys = require('sys'),
     path = require('path'),
-    redis = require('redis'),
     sio = require('socket.io'),
-    express = require('express');
+    express = require('express'),
+    stats = require('redis').createClient(),
+    updates = require('redis').createClient();
 
+
+// little helper to package up zrevrange redis query results
+
+function zresults(resp) {
+  results = []
+  for (var i=0; i < resp.length; i+=2) {
+    r = JSON.parse(resp[i]);
+    r['score'] = resp[i+1];
+    results.push(r)
+  }
+  return results;
+}
 
 // get the configuration
 
@@ -49,15 +62,29 @@ app.configure('production', function(){
 });
 
 app.get('/', function(req, res){
-  requestCount += 1;
   res.render('index', {
     title: 'wikistream',
     wikis: config.wikipedias,
     wikisSorted: wikisSorted
   });
-  console.log(requestCount + " - " + 
-              req.headers["x-forwarded-for"] + " - " + 
-              req.headers["user-agent"]);
+});
+
+app.get('/users-daily.json', function(req, res){
+  stats.zrevrange(['users-daily', 0, 50, 'withscores'], function (e, r) {
+    res.send(zresults(r));
+  });
+});
+
+app.get('/pages-daily.json', function(req, res){
+  stats.zrevrange(['pages-daily', 0, 50, 'withscores'], function (e, r) {
+    res.send(zresults(r));
+  });
+});
+
+app.get('/robots-daily.json', function(req, res){
+  stats.zrevrange(['robots-daily', 0, 50, 'withscores'], function (e, r) {
+    res.send(zresults(r));
+  });
 });
 
 app.listen(3000);
@@ -66,9 +93,8 @@ app.listen(3000);
 // set up the socket.io update stream
 
 var socket = sio.listen(app);
-var wikipedia = redis.createClient();
 
-wikipedia.subscribe('wikipedia');
-wikipedia.on("message", function (channel, message) {
+updates.subscribe('wikipedia');
+updates.on("message", function (channel, message) {
     socket.broadcast(message);
 });
