@@ -5,12 +5,12 @@ header
   span(class='pauseInfo') Press "p" to pause
 
 a(href="http://github.com/edsu/wikistream")
-  img(style="position: absolute; top: 0; right: 0; border: 0;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
+  img(style="position: absolute; top: 0; right: 0; border: 0; z-index: 1;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
 
 div(id="updatePanel")
   table(id="controls")
     tr
-      td Filters:
+      td Filters
       td
         select(name="wikis")
           option(value="all") All Wikipedias
@@ -31,11 +31,19 @@ div(id="updatePanel")
   div(id='updates')
 
 div(id="stats")
-  h2 Pages Daily
-  div(id="pagesDaily", class="statsPanel")
 
-  h2 Users Daily
-  div(id="usersDaily", class="statsPanel")
+  div(class="statsPanel")
+    h2 Trending Articles (Current Hour)
+    ol(id="articlesHourly", class="statsList")
 
-  h2 Robots Daily
-  div(id="robotsDaily", class="statsPanel")
+  div(class="statsPanel")
+    h2 Trending Articles Today
+    ol(id="articlesDaily", class="statsList")
+
+  div(class="statsPanel") 
+    h2 Top Editors Today
+    ol(id="usersDaily", class="statsList")
+
+  div(class="statsPanel")
+    h2 Top Robots Today
+    ol(id="robotsDaily", class="statsList")

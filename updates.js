@@ -1,8 +1,7 @@
 var fs = require('fs'),
     path = require('path'),
     irc = require('irc-js'),
-    redis = require('redis').createClient(),
-    statsStart = new Date();
+    redis = require('redis').createClient();
 
 function main() {
   configFile = path.join(__dirname, 'config.json');
@@ -25,7 +24,8 @@ function main() {
     client.on('privmsg', processMessage);
   });
 
-  setStatsTimeout();  
+  setDailyStatsTimeout();  
+  setHourlyStatsTimeout();
 }
 
 function parse_msg (msg) {
@@ -46,12 +46,14 @@ function parse_msg (msg) {
   var isNewPage = flag.match(/N/) ? true : false;
   var isUnpatrolled = flag.match(/!/) ? true : false;
 
-  // determine the url
   var page = m[1];
   var wikipedia = msg[0];
   var wikipediaUrl = 'http://' + wikipedia.replace('#', '') + '.org';
   var pageUrl = wikipediaUrl + '/wiki/' + page.replace(/ /g, '_');
   var userUrl = wikipediaUrl + '/wiki/User:' + user;
+
+  var parts = page.split(":");
+  var namespace = parts.length > 1 ? parts[0] : "article";
   
   return {
     flag: flag, 
@@ -69,48 +71,88 @@ function parse_msg (msg) {
     unpatrolled: isUnpatrolled,
     newPage: isNewPage,
     robot: isRobot,
-    anonymous: anonymous
+    anonymous: anonymous,
+    namespace: namespace
   }
 }
 
 function processMessage (msg) {
-    m = parse_msg(msg.params);
-    if (m) {
-      redis.publish('wikipedia', JSON.stringify(m));
-      stats(m);
-      console.log(m.page);
-    }
+  m = parse_msg(msg.params);
+  if (m) {
+    redis.publish('wikipedia', JSON.stringify(m));
+    stats(m);
+    console.log(m.page);
+  }
 }
 
 function stats (msg) {
-  redis.zincrby('pages-daily', 1, JSON.stringify(
-    {name: msg.page, 'url': msg.url, 'wikipedia': msg.wikipediaShort}));
+  dailyStats(msg);
+  hourlyStats(msg);
+  permStats(msg);
+}
+
+function dailyStats (msg) {
   redis.zincrby('wikipedias-daily', 1, msg.wikipedia);
+  if (msg.namespace == "article") {
+    redis.zincrby('articles-daily', 1, JSON.stringify(
+      {name: msg.page, 'url': msg.pageUrl, 'wikipedia': msg.wikipediaShort}));
+  }
   if (msg.robot) {
     redis.zincrby('robots-daily', 1, JSON.stringify(
-    {name: msg.user, url: msg.userUrl, 'wikipedia': msg.wikipediaShort}));
+      {name: msg.user, url: msg.userUrl, 'wikipedia': msg.wikipediaShort}));
+
   } else {
     redis.zincrby('users-daily', 1, JSON.stringify(
       {name: msg.user, url: msg.userUrl, 'wikipedia': msg.wikipediaShort}));
   }
 }
 
-function setStatsTimeout () {
+function setDailyStatsTimeout () {
   var t = new Date();
   var elapsed = t.getUTCHours() * 60 * 60 
                 + t.getUTCMinutes() * 60 
                 + t.getUTCSeconds();
   var remaining = 24 * 60 * 60 - elapsed;
-  setTimeout(resetStats, remaining * 1000);
+  setTimeout(resetDailyStats, remaining * 1000);
 }
 
-function resetStats () {
+function resetDailyStats () {
   console.log("resetting daily stats");
-  redis.del('pages-daily');
+  redis.del('articles-daily');
   redis.del('robots-daily');
   redis.del('users-daily');
   redis.del('wikipedias-daily');
-  setStatsTimeout();
+  setDailyStatsTimeout();
 }
+
+function hourlyStats (msg) {
+  if (msg.namespace == "article") {
+    redis.zincrby('articles-hourly', 1, JSON.stringify(
+      {name: msg.page, 'url': msg.pageUrl, 'wikipedia': msg.wikipediaShort}));
+  }
+}
+
+function setHourlyStatsTimeout () {
+  var t = new Date();
+  var elapsed = t.getUTCMinutes() * 60 + t.getUTCSeconds();
+  var remaining = 60 * 60 - elapsed;
+  setTimeout(resetHourlyStats, remaining * 1000);
+}
+
+function resetHourlyStats () {
+  console.log("resetting daily stats");
+  redis.del('articles-hourly');
+  setHourlyStatsTimeout();
+}
+
+function permStats (msg) {
+  if (msg.robot) {
+    redis.zincrby('robots', 1, msg.user);
+  }
+  if (msg.namespace != "article") {
+    redis.zincrby('namespaces', 1, msg.namespace);
+  }
+}
+
 
 main();

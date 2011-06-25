@@ -69,20 +69,28 @@ app.get('/', function(req, res){
   });
 });
 
-app.get('/users-daily.json', function(req, res){
-  stats.zrevrange(['users-daily', 0, 5, 'withscores'], function (e, r) {
+// TODO: might be able to create one stats view that does all these?
+
+app.get('/stats/users-daily.json', function(req, res){
+  stats.zrevrange(['users-daily', 0, 99, 'withscores'], function (e, r) {
     res.send(zresults(r));
   });
 });
 
-app.get('/pages-daily.json', function(req, res){
-  stats.zrevrange(['pages-daily', 0, 5, 'withscores'], function (e, r) {
+app.get('/stats/articles-daily.json', function(req, res){
+  stats.zrevrange(['articles-daily', 0, 99, 'withscores'], function (e, r) {
     res.send(zresults(r));
   });
 });
 
-app.get('/robots-daily.json', function(req, res){
-  stats.zrevrange(['robots-daily', 0, 5, 'withscores'], function (e, r) {
+app.get('/stats/articles-hourly.json', function(req, res){
+  stats.zrevrange(['articles-hourly', 0, 99, 'withscores'], function (e, r) {
+    res.send(zresults(r));
+  });
+});
+
+app.get('/stats/robots-daily.json', function(req, res){
+  stats.zrevrange(['robots-daily', 0, 99, 'withscores'], function (e, r) {
     res.send(zresults(r));
   });
 });

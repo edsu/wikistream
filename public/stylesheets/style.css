@@ -1,6 +1,6 @@
 body {
   padding-left: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 10pt "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -12,6 +12,7 @@ header {
   margin-right: auto;
   width: 350px;
   font-family: 'Slackey';
+  color: gray;
   padding-bottom: 10px;
 }
 
@@ -31,17 +32,16 @@ header img {
 
 #updatePanel {
     margin-top: 10px;
-    margin-left: auto;
+    margin-left: 50px;
     height: 850px;
     width: 650px;
     float: left;
-    border: thin #eeeeee solid;
 }
 
 #controls {
     margin-bottom: 10px;
     border: thin #eeeeee solid;
-    font-weight: bold;
+    font-family: 'Slackey';
     color: gray;
     width: 100%;
     padding: 3px;
@@ -129,18 +129,35 @@ a.page {
 }
 
 #stats {
-  width: 30%;
-  margin-left: 700px;
-  margin-right: auto;
+    width: 360px;
+    margin-left: 725px;
+    margin-right: auto;
 }
 
 .statsPanel {
+    margin-top: 10px;
+    padding-right: 5px;
     border: thin #eeeeee solid;
-    padding: 10px;
-    height: 200px;
-    width: 300px;
+}
+
+.statsList {
+    margin-top: 10px;
+    height: 110px;
     overflow: auto;
 }
+
+#stats h2 {
+    font-weight: bold;
+    color: gray;
+    font-size: 12pt;
+    padding: 0;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: 'Slackey';
+}
+
+
 
 #usersDaily {
 }
@@ -148,5 +165,8 @@ a.page {
 #robotsDaily {
 }
 
-#pagesdDaily {
+#articlesDaily {
+}
+
+#articlesHourly {
 }

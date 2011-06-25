@@ -25,6 +25,8 @@ function init() {
     removeOld();
   });
   stats();
+  $(window).blur(togglePause);
+  $(window).focus(togglePause);
 }
 
 function addUpdate(msg) {
@@ -140,20 +142,28 @@ function userFilter(msg) {
 }
 
 function stats() {
-    panels = [
-        {url: '/pages-daily.json', divId: '#pagesDaily'},
-        {url: '/users-daily.json', divId: '#usersDaily'},
-        {url: '/robots-daily.json', divId: '#robotsDaily'}
-    ];
-
-    for (var i in panels) {
-        $.getJSON(panels[i].url, function (d) {
-            for (var j in d) {
-                var s = d[j];
-                alert(i);
-                var p = $(panels[i].divId);
-                p.append($('<div>').append($('<a>').attr({href: s.url}).text(s.name + " (" + s.score + ")")))
-            }
-        });
+    function add_stats(id, d) {
+        for (var i in d) {
+            $(id).append($('<li>').append($('<a>').attr({href: d[i].url}).text(d[i].name + " [" + d[i].wikipedia + "] (" + d[i].score + ")")))
+        }
     }
+
+    $.getJSON('/stats/articles-hourly.json', function (d) {
+        $("#articlesHourly").empty();
+        add_stats("#articlesHourly", d);
+    });
+    $.getJSON('/stats/articles-daily.json', function (d) {
+        $("#articlesDaily").empty();
+        add_stats("#articlesDaily", d);
+    });
+    $.getJSON('/stats/users-daily.json', function (d) {
+        $("#usersDaily").empty();
+        add_stats("#usersDaily", d);
+    });
+    $.getJSON('/stats/robots-daily.json', function (d) {
+        $("#robotsDaily").empty();
+        add_stats("#robotsDaily", d);
+    });
+
+    setTimeout(stats, 10000);
 }
