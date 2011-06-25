@@ -36,15 +36,16 @@ header img {
     height: 850px;
     width: 650px;
     float: left;
+    border: thin #eeeeee solid;
 }
 
 #controls {
     margin-bottom: 10px;
-    border: thin #eeeeee solid;
     font-family: 'Slackey';
     color: gray;
     width: 100%;
     padding: 3px;
+    border-bottom: thin #eeeeee solid;
 }
 
 #wikis {
@@ -153,7 +154,7 @@ a.page {
     padding: 0;
     margin-left: 10px;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     font-family: 'Slackey';
 }
 

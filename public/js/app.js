@@ -144,7 +144,7 @@ function userFilter(msg) {
 function stats() {
     function add_stats(id, d) {
         for (var i in d) {
-            $(id).append($('<li>').append($('<a>').attr({href: d[i].url}).text(d[i].name + " [" + d[i].wikipedia + "] (" + d[i].score + ")")))
+            $(id).append($('<li>').append($('<a>').attr({href: d[i].url, target: "_new"}).text(d[i].name + " [" + d[i].wikipedia + "] (" + d[i].score + ")")))
         }
     }
 
