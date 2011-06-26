@@ -121,7 +121,8 @@ function setupControls() {
     }
   });
 
-  $(document).bind('keydown', 'p', togglePause);
+  $(document).bind('keyup', 'p', togglePause);
+  $(document).bind('keyup', 'pause', togglePause);
 }
 
 function wikipediaFilter(msg) {
