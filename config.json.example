@@ -143,6 +143,10 @@
     "#en.wikipedia": {
       "short": "en", 
       "long": "English Wikipedia"
+    },
+    "#el.wikipedia": {
+      "short": "el", 
+      "long": "Greek Wikipedia"
     }, 
     "#da.wikipedia": {
       "short": "da", 
