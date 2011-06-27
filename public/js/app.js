@@ -25,8 +25,6 @@ function init() {
     removeOld();
   });
   stats();
-  $(window).blur(togglePause);
-  $(window).focus(togglePause);
 }
 
 function addUpdate(msg) {
