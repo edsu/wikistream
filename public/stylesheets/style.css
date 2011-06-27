@@ -40,12 +40,15 @@ header #logo {
 }
 
 #controls {
-    margin-bottom: 10px;
+    margin: auto;
     font-family: 'Slackey';
     color: gray;
-    width: 100%;
-    padding: 3px;
+    padding: 3px 3px 14px;
     border-bottom: thin #eeeeee solid;
+}
+
+#controls td {
+    padding-right: 10px;
 }
 
 #wikis {
@@ -57,12 +60,14 @@ header #logo {
 #slider {
     width: 75px;
     float: left;
-    margin-left: 5px;
+    margin-top: 5px;
+    margin-left: 65px;
     vertical-align: middle;
 }
 
 #deltaControl {
-    min-width: 250px;
+    width: 200px;
+    text-align: center;
 }
 
 #deltaLabel {
@@ -70,11 +75,14 @@ header #logo {
 }
 
 #deltaLimit {
+    width: 40px;
+    float: right;
 }
 
 #updates {
     clear: both;
     border: solid thin #eee;
+    padding: 5px;
 }
 
 .update a {
