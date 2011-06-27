@@ -8,8 +8,7 @@ a {
 }
 
 header {
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   width: 350px;
   font-family: 'Slackey';
   color: gray;
@@ -30,13 +29,14 @@ header img {
     float: left;
 }
 
+header #logo {
+  margin: auto;
+  width: 300px;
+}
+
 #updatePanel {
     margin-top: 10px;
-    margin-left: 50px;
     height: 850px;
-    width: 650px;
-    float: left;
-    border: thin #eeeeee solid;
 }
 
 #controls {
@@ -62,7 +62,7 @@ header img {
 }
 
 #deltaControl {
-    width: 270px;
+    min-width: 250px;
 }
 
 #deltaLabel {
@@ -74,6 +74,7 @@ header img {
 
 #updates {
     clear: both;
+    border: solid thin #eee;
 }
 
 .update a {
@@ -104,18 +105,9 @@ header img {
     font-weight: bold;
 }
 
-.lang.ar {
-    direction: rtl;
-}
-
-.lang.fa {
-    direction: rtl;
-}
-
-.lang.ur {
-    direction: rtl;
-}
-
+.lang.ar,
+.lang.fa,
+.lang.ur,
 .lang.he {
     direction: rtl;
 }
@@ -130,9 +122,6 @@ a.page {
 }
 
 #stats {
-    width: 360px;
-    margin-left: 725px;
-    margin-right: auto;
 }
 
 .statsPanel {
