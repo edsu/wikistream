@@ -3,6 +3,8 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/grid12_fluid.css')
+    - if (type == 'map')
+      link(rel='stylesheet', href='/ol/theme/default/style.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/smoothness/jquery-ui-1.8.13.custom.css')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Slackey', rel='stylesheet')
@@ -13,5 +15,8 @@ html
     script(src='/js/app.js')
     script(src='/js/jquery.blockUI.js')
     script(src='/js/jquery-ui.js')
+    - if (type == 'map')
+        script(src='/js/OpenLayers.js')
+        script(src='/js/map.js')
 
   body!= body

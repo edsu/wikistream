@@ -1,6 +1,7 @@
 var fs = require('fs'),
     path = require('path'),
     irc = require('irc-js'),
+    geoip = require('geoip'),
     redis = require('redis').createClient();
 
 function main() {
@@ -26,6 +27,11 @@ function main() {
 
   setDailyStatsTimeout();  
   setHourlyStatsTimeout();
+}
+
+function geocode(user) {
+    var data = new geoip.City('/usr/share/GeoIP/GeoLiteCity.dat');
+    return data.lookupSync(user);
 }
 
 function parse_msg (msg) {
@@ -54,6 +60,12 @@ function parse_msg (msg) {
 
   var parts = page.split(":");
   var namespace = parts.length > 1 ? parts[0] : "article";
+
+  if (anonymous) {
+    var geodata = geocode(user);
+  } else {
+    var geodata = null;
+  }
   
   return {
     flag: flag, 
@@ -72,7 +84,8 @@ function parse_msg (msg) {
     newPage: isNewPage,
     robot: isRobot,
     anonymous: anonymous,
-    namespace: namespace
+    namespace: namespace,
+    geodata: geodata
   }
 }
 
@@ -81,7 +94,7 @@ function processMessage (msg) {
   if (m) {
     redis.publish('wikipedia', JSON.stringify(m));
     stats(m);
-    console.log(m.page);
+    console.log(m.user + ' - ' + m.page);
   }
 }
 

@@ -64,9 +64,18 @@ app.configure('production', function(){
 app.get('/', function(req, res){
   res.render('index', {
     title: 'wikistream',
+    type: 'stream',
     wikis: config.wikipedias,
     wikisSorted: wikisSorted
   });
+});
+
+// map view
+app.get('/map', function(req, res){
+  res.render('map', {
+    title: 'wikistream',
+    type: 'map'
+  }); 
 });
 
 // TODO: might be able to create one stats view that does all these?

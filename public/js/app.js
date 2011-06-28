@@ -32,6 +32,12 @@ function addUpdate(msg) {
   var a = $('<a>').attr({'class': 'page', 'href': msg.url, 'title': msg.comment, target: '_new'}).text(msg.page);
   var delta = $('<span>').attr({'class': 'delta'}).text(msg.delta);
 
+  if (includeAnonymous && msg.anonymous) {
+    var geo = $('<span>').attr({'class': 'geo'}).text(msg.geodata.country_code);
+  } else {
+    var geo = $('<span>').text('');
+  }
+
   updateClasses = ['update'];
   if (msg.newPage) updateClasses.push('newPage');
   if (msg.unpatrolled) updateClasses.push('unpatrolled');
@@ -41,6 +47,7 @@ function addUpdate(msg) {
     .append(lang)
     .append(a)
     .append(delta)
+    .append(geo)
     .hide();
   $('#updates').prepend(d);
   d.slideDown('medium');

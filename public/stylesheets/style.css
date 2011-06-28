@@ -12,6 +12,7 @@ header {
   font-family: 'Slackey';
   color: gray;
   padding-bottom: 10px;
+  height: 80px;
 }
 
 header span.wikistream {
@@ -119,9 +120,14 @@ header #logo {
     direction: rtl;
 }
 
+.geo,
 .delta {
     color: gray;
     font-size: 8pt;
+}
+
+.geo {
+    margin-left: 5px;
 }
 
 a.page {
@@ -166,4 +172,17 @@ a.page {
 }
 
 #articlesHourly {
+}
+
+html,
+body,
+#main,
+#mapPanel {
+/*    height: 100%; */
+}
+
+#map {
+    width: 90%;
+    margin: auto !important;
+    border: solid 1px #565656;
 }
