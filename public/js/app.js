@@ -30,7 +30,7 @@ function init() {
 function addUpdate(msg) {
   var lang = $('<span>').attr({'class': 'lang'}).text('[' + msg.wikipediaShort + ']');
   var a = $('<a>').attr({'class': 'page', 'href': msg.url, 'title': msg.comment, target: '_new'}).text(msg.page);
-  var delta = $('<span>').attr({'class': 'delta'}).text(msg.delta);
+  var delta = $('<span>').attr({'class': 'delta'}).text(msg.delta >=0 ? "+" + msg.delta : msg.delta);
 
   updateClasses = ['update'];
   if (msg.newPage) updateClasses.push('newPage');
