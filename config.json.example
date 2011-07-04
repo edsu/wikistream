@@ -491,7 +491,7 @@
     }, 
     "#ca.wikipedia": {
       "short": "ca", 
-      "long": "Canadian Wikipedia", 
+      "long": "Catalan Wikipedia", 
       "namespaces": {
         "Media": "media", 
         "Ajuda": "help", 
