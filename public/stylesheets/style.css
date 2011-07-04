@@ -1,5 +1,4 @@
 body {
-  padding-left: 50px;
   font: 10pt "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -8,8 +7,7 @@ a {
 }
 
 header {
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   width: 350px;
   font-family: 'Slackey';
   color: gray;
@@ -30,22 +28,26 @@ header img {
     float: left;
 }
 
+header #logo {
+  margin: auto;
+  width: 300px;
+}
+
 #updatePanel {
     margin-top: 10px;
-    margin-left: 50px;
     height: 850px;
-    width: 650px;
-    float: left;
-    border: thin #eeeeee solid;
 }
 
 #controls {
-    margin-bottom: 10px;
+    margin: auto;
     font-family: 'Slackey';
     color: gray;
-    width: 100%;
-    padding: 3px;
+    padding: 3px 3px 14px;
     border-bottom: thin #eeeeee solid;
+}
+
+#controls td {
+    padding-right: 10px;
 }
 
 #wikis {
@@ -57,12 +59,14 @@ header img {
 #slider {
     width: 75px;
     float: left;
-    margin-left: 5px;
+    margin-top: 5px;
+    margin-left: 65px;
     vertical-align: middle;
 }
 
 #deltaControl {
-    width: 270px;
+    width: 200px;
+    text-align: center;
 }
 
 #deltaLabel {
@@ -70,10 +74,14 @@ header img {
 }
 
 #deltaLimit {
+    width: 40px;
+    float: right;
 }
 
 #updates {
     clear: both;
+    border: solid thin #eee;
+    padding: 5px;
 }
 
 .update a {
@@ -104,18 +112,9 @@ header img {
     font-weight: bold;
 }
 
-.lang.ar {
-    direction: rtl;
-}
-
-.lang.fa {
-    direction: rtl;
-}
-
-.lang.ur {
-    direction: rtl;
-}
-
+.lang.ar,
+.lang.fa,
+.lang.ur,
 .lang.he {
     direction: rtl;
 }
@@ -130,9 +129,6 @@ a.page {
 }
 
 #stats {
-    width: 360px;
-    margin-left: 725px;
-    margin-right: auto;
 }
 
 .statsPanel {

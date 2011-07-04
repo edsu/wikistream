@@ -1,49 +1,52 @@
-header
-  img(src="/images/wikipedia.png")
-  span(class='wikistream') wikistream
-  br
-  span(class='pauseInfo') Press "p" to pause
+div(class="container container_12")
+  header(class="grid_12")
+    div(id="logo")
+      img(src="/images/wikipedia.png")
+      span(class='wikistream') wikistream
+      br
+      span(class='pauseInfo') Press "p" to pause
 
 a(href="http://github.com/edsu/wikistream")
   img(style="position: absolute; top: 0; right: 0; border: 0; z-index: 3;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
 
-div(id="updatePanel")
-  table(id="controls")
-    tr
-      td Filters
-      td
-        select(name="wikis")
-          option(value="all") All Wikipedias
-          - for (var i in wikisSorted)
-            option(value="#{wikisSorted[i]}")= wikis[wikisSorted[i]].long
-      td 
-        input(type="checkbox", name="user", checked="true")
-        img(src="/images/person.png", title="Wikipedia User")
-        input(type="checkbox", name="robot", checked="true")
-        img(src="/images/robot.png", title="Wikipedia Robot")
-        input(type="checkbox", name="anonymous", checked="true")
-        img(src="/images/question.png", title="Anonymous User")
-      td(id="deltaControl")
-        span(id="slider")
-        span(id="deltaLabel") Edit Size (Chars): ± 
-        span(id="deltaLimit") 0
+div(class="container container_12")
+  div(id="updatePanel", class="grid_8")
+    table(id="controls")
+      tr
+        td
+          select(name="wikis")
+            option(value="all") All Wikipedias
+            - for (var i in wikisSorted)
+              option(value="#{wikisSorted[i]}")= wikis[wikisSorted[i]].long
+        td 
+          input(type="checkbox", name="user", checked="true")
+          img(src="/images/person.png", title="Wikipedia User")
+          input(type="checkbox", name="robot", checked="true")
+          img(src="/images/robot.png", title="Wikipedia Robot")
+          input(type="checkbox", name="anonymous", checked="true")
+          img(src="/images/question.png", title="Anonymous User")
+        td(id="deltaControl")
+          span(id="deltaLabel") Edit Size (Chars): ± 
+            span(id="deltaLimit") 0
+          br
+          span(id="slider")
         
-  div(id='updates')
+    div(id='updates')
 
-div(id="stats")
+  div(id="stats", class="grid_4")
 
-  div(class="statsPanel")
-    h2 Trending Articles (Current Hour)
-    ol(id="articlesHourly", class="statsList")
+    div(class="statsPanel")
+      h2 Trending Articles (Current Hour)
+      ol(id="articlesHourly", class="statsList")
 
-  div(class="statsPanel")
-    h2 Trending Articles Today
-    ol(id="articlesDaily", class="statsList")
+    div(class="statsPanel")
+      h2 Trending Articles Today
+      ol(id="articlesDaily", class="statsList")
 
-  div(class="statsPanel") 
-    h2 Top Editors Today
-    ol(id="usersDaily", class="statsList")
+    div(class="statsPanel") 
+      h2 Top Editors Today
+      ol(id="usersDaily", class="statsList")
 
-  div(class="statsPanel")
-    h2 Top Robots Today
-    ol(id="robotsDaily", class="statsList")
+    div(class="statsPanel")
+      h2 Top Robots Today
+      ol(id="robotsDaily", class="statsList")
