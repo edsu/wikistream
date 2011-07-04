@@ -32,9 +32,9 @@ header img {
 
 #updatePanel {
     margin-top: 10px;
-    margin-left: 25px;
+    margin-left: 20px;
     height: 850px;
-    width: 710px;
+    width: 695px;
     float: left;
     border: thin #eeeeee solid;
 }
@@ -79,6 +79,7 @@ header img {
 .update a {
     font-size: 13pt;
     color: black;
+    margin-left: 5px;
 }
 
 .update {
