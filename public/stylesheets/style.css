@@ -32,9 +32,9 @@ header img {
 
 #updatePanel {
     margin-top: 10px;
-    margin-left: 50px;
+    margin-left: 25px;
     height: 850px;
-    width: 650px;
+    width: 710px;
     float: left;
     border: thin #eeeeee solid;
 }
@@ -55,14 +55,14 @@ header img {
 } 
 
 #slider {
-    width: 75px;
+    width: 50px;
     float: left;
     margin-left: 5px;
     vertical-align: middle;
 }
 
 #deltaControl {
-    width: 270px;
+    width: 250px;
 }
 
 #deltaLabel {

@@ -3,6 +3,7 @@ $(document).ready(init);
 var pause = false;
 var deltaLimit = 0;
 var wikipediaLimit = "all";
+var namespaceLimit = "all";
 var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
@@ -18,6 +19,7 @@ function init() {
     if (pause) return;
     if (! wikipediaFilter(msg)) return;
     if (! userFilter(msg)) return;
+    if (! namespaceFilter(msg)) return;
     if (Math.abs(msg.delta) < deltaLimit) return;
 
     // update the stream
@@ -118,15 +120,24 @@ function setupControls() {
       includeAnonymous = checked;
     }
   });
+  $('select[name="namespace"]').change(function() {
+    namespaceLimit = ($('select[name="namespace"]').val());
+  });
 
   $(document).bind('keyup', 'p', togglePause);
   $(document).bind('keyup', 'pause', togglePause);
 }
 
 function wikipediaFilter(msg) {
-    if (wikipediaLimit == "all") return true;
-    if (wikipediaLimit == msg.wikipedia) return true;
-    return false;
+  if (wikipediaLimit == "all") return true;
+  if (wikipediaLimit == msg.wikipedia) return true;
+  return false;
+}
+
+function namespaceFilter(msg) {
+  if (namespaceLimit == "all") return true;
+  if (namespaceLimit == msg.namespace) return true;
+  return false;
 }
 
 function userFilter(msg) {

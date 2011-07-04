@@ -3,9 +3,11 @@ var fs = require('fs'),
     irc = require('irc-js'),
     redis = require('redis').createClient();
 
+// read the config
+configFile = path.join(__dirname, 'config.json');
+config = JSON.parse(fs.readFileSync(configFile))
+
 function main() {
-  configFile = path.join(__dirname, 'config.json');
-  config = JSON.parse(fs.readFileSync(configFile))
   channels = [];
   for (var chan in config.wikipedias) { channels.push(chan); }
 
@@ -51,10 +53,8 @@ function parse_msg (msg) {
   var wikipediaUrl = 'http://' + wikipedia.replace('#', '') + '.org';
   var pageUrl = wikipediaUrl + '/wiki/' + page.replace(/ /g, '_');
   var userUrl = wikipediaUrl + '/wiki/User:' + user;
+  var namespace = getNamespace(wikipedia, page);
 
-  var parts = page.split(":");
-  var namespace = parts.length > 1 ? parts[0] : "article";
-  
   return {
     flag: flag, 
     page: page, 
@@ -81,7 +81,7 @@ function processMessage (msg) {
   if (m) {
     redis.publish('wikipedia', JSON.stringify(m));
     stats(m);
-    console.log(m.page);
+    console.log(m.page + " -- " + m.namespace);
   }
 }
 
@@ -154,5 +154,16 @@ function permStats (msg) {
   }
 }
 
-
+function getNamespace (wikipedia, page) {
+  ns = null;
+  var parts = page.split(':');
+  if (parts.length > 1 && parts[1][0] != " ") {
+    ns = config['wikipedias'][wikipedia]['namespaces'][parts[0]];
+    if (! ns) ns = "wikipedia";
+  } else {
+    ns = 'article';
+  }
+  return ns;
+}
+ 
 main();
