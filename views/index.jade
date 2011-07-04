@@ -17,7 +17,8 @@ div(id="updatePanel")
             option(value="#{wikisSorted[i]}")= wikis[wikisSorted[i]].long
       td(id="namespaceControl")
         select(name="namespace")
-          option(id="all") All Namespaces
+          option(value="all") All Namespaces
+          option(value="article") Article
           option(value="category") Category
           option(value="category talk") Category Talk 
           option(value="file") File 
