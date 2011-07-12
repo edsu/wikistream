@@ -152,27 +152,31 @@ function userFilter(msg) {
 }
 
 function stats() {
-    function add_stats(id, d) {
+    function add_stats(id, d, f) {
         for (var i in d) {
-            $(id).append($('<li>').append($('<a>').attr({href: d[i].url, target: "_new"}).text(d[i].name + " [" + d[i].wikipedia + "] (" + d[i].score + ")")))
+          if (f == "all") {
+           	$(id).append($('<li>').append($('<a>').attr({href: d[i].url, target: "_new"}).text(d[i].name + " [" + d[i].wikipedia + "] (" + d[i].score + ")")));
+    			} else if (d[i].wikipedia == f) {
+    				$(id).append($('<li>').append($('<a>').attr({href: d[i].url, target: "_new"}).text(d[i].name + " [" + d[i].wikipedia + "] (" + d[i].score + ")")));
+    			}
         }
     }
 
     $.getJSON('/stats/articles-hourly.json', function (d) {
         $("#articlesHourly").empty();
-        add_stats("#articlesHourly", d);
+        add_stats("#articlesHourly", d, wikipediaLimit);
     });
     $.getJSON('/stats/articles-daily.json', function (d) {
         $("#articlesDaily").empty();
-        add_stats("#articlesDaily", d);
+        add_stats("#articlesDaily", d, wikipediaLimit);
     });
     $.getJSON('/stats/users-daily.json', function (d) {
         $("#usersDaily").empty();
-        add_stats("#usersDaily", d);
+        add_stats("#usersDaily", d, wikipediaLimit);
     });
     $.getJSON('/stats/robots-daily.json', function (d) {
         $("#robotsDaily").empty();
-        add_stats("#robotsDaily", d);
+        add_stats("#robotsDaily", d, wikipediaLimit);
     });
 
     setTimeout(stats, 10000);
