@@ -10,8 +10,7 @@ var includeAnonymous = true;
 
 function init() {
   setupControls();
-  var socket = new io.Socket();
-  socket.connect();
+  var socket = io.connect();
   socket.on('message', function(data) {
     var msg = jQuery.parseJSON(data);
 

@@ -53,9 +53,11 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
+/*
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });
+*/
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
@@ -100,9 +102,12 @@ app.listen(3000);
 
 // set up the socket.io update stream
 
-var socket = sio.listen(app);
+var io = sio.listen(app);
 
 updates.subscribe('wikipedia');
-updates.on("message", function (channel, message) {
-    socket.broadcast(message);
+
+io.sockets.on('connection', function(socket) {
+    updates.on("message", function (channel, message) {
+        socket.send(message);
+    });
 });
