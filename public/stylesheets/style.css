@@ -13,6 +13,7 @@ header {
     width: 350px;
     color: gray;
     padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 header span.wikistream {
@@ -31,7 +32,7 @@ header img {
 }
 
 #updatePanel {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     height: 825px;
