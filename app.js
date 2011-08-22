@@ -71,10 +71,22 @@ app.get('/', function(req, res){
   });
 });
 
+app.get('/trends/', function(req, res){
+  res.render('trends', {
+    title: 'wikistream daily trends',
+  });
+});
+
+app.get('/about/', function(req, res){
+  res.render('about', {
+    title: 'about wikistream',
+  });
+});
+
 // TODO: might be able to create one stats view that does all these?
 
 app.get('/stats/users-daily.json', function(req, res){
-  stats.zrevrange(['users-daily', 0, 99, 'withscores'], function (e, r) {
+  stats.zrevrange(['users-daily', 0, 99, 'withscores'], function(e, r) {
     res.send(zresults(r));
   });
 });
@@ -103,6 +115,10 @@ app.listen(3000);
 // set up the socket.io update stream
 
 var io = sio.listen(app);
+
+io.configure('production', function() {
+    io.set('log level', 2);
+});
 
 updates.subscribe('wikipedia');
 

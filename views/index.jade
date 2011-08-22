@@ -1,12 +1,3 @@
-header
-  img(src="/images/wikipedia.png")
-  span(class='wikistream') wikistream
-  br
-  span(class='pauseInfo') Press "p" to pause
-
-a(href="http://github.com/edsu/wikistream")
-  img(style="position: absolute; top: 0; right: 0; border: 0; z-index: 3;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
-
 div(id="updatePanel")
   table(id="controls")
     tr
@@ -49,21 +40,3 @@ div(id="updatePanel")
         span(id="deltaLimit") 0
         
   div(id='updates')
-
-div(id="stats")
-
-  div(class="statsPanel")
-    h2 Trending Articles (Current Hour)
-    ol(id="articlesHourly", class="statsList")
-
-  div(class="statsPanel")
-    h2 Trending Articles Today
-    ol(id="articlesDaily", class="statsList")
-
-  div(class="statsPanel") 
-    h2 Top Editors Today
-    ol(id="usersDaily", class="statsList")
-
-  div(class="statsPanel")
-    h2 Top Robots Today
-    ol(id="robotsDaily", class="statsList")

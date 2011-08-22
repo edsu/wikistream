@@ -158,20 +158,20 @@ function stats() {
     }
 
     $.getJSON('/stats/articles-hourly.json', function (d) {
-        $("#articlesHourly").empty();
-        add_stats("#articlesHourly", d);
+        $("#articlesHourly ol").empty();
+        add_stats("#articlesHourly ol", d);
     });
     $.getJSON('/stats/articles-daily.json', function (d) {
-        $("#articlesDaily").empty();
-        add_stats("#articlesDaily", d);
+        $("#articlesDaily ol").empty();
+        add_stats("#articlesDaily ol", d);
     });
     $.getJSON('/stats/users-daily.json', function (d) {
-        $("#usersDaily").empty();
-        add_stats("#usersDaily", d);
+        $("#usersDaily ol").empty();
+        add_stats("#usersDaily ol", d);
     });
     $.getJSON('/stats/robots-daily.json', function (d) {
-        $("#robotsDaily").empty();
-        add_stats("#robotsDaily", d);
+        $("#robotsDaily ol").empty();
+        add_stats("#robotsDaily ol", d);
     });
 
     setTimeout(stats, 10000);

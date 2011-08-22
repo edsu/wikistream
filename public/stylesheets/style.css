@@ -1,6 +1,6 @@
 body {
-  padding-left: 50px;
-  font: 10pt "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding-left: 50px;
+    font: 10pt "Courier New";
 }
 
 a {
@@ -8,16 +8,16 @@ a {
 }
 
 header {
-  margin-left: auto;
-  margin-right: auto;
-  width: 350px;
-  font-family: 'Slackey';
-  color: gray;
-  padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+    color: gray;
+    padding-bottom: 10px;
 }
 
 header span.wikistream {
-  font-size: 20pt;
+    font-size: 20pt;
+    font-weight: bold;
 }
 
 header span.pauseInfo {
@@ -31,21 +31,19 @@ header img {
 }
 
 #updatePanel {
-    margin-top: 10px;
-    margin-left: 20px;
-    height: 850px;
-    width: 695px;
-    float: left;
-    border: thin #eeeeee solid;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 825px;
+    width: 800px;
+    border: thin gray solid;
+    padding: 3px;
+    background-color: #eeeeee;
 }
 
 #controls {
     margin-bottom: 10px;
-    font-family: 'Slackey';
-    color: gray;
     width: 100%;
-    padding: 3px;
-    border-bottom: thin #eeeeee solid;
 }
 
 #wikis {
@@ -62,7 +60,7 @@ header img {
 }
 
 #deltaControl {
-    width: 250px;
+    width: 275px;
 }
 
 #deltaLabel {
@@ -101,7 +99,7 @@ header img {
 
 .lang {
     margin-right: 10px;
-    font-family: Courier;
+    /*font-family: Courier;*/
     font-weight: bold;
 }
 
@@ -130,24 +128,6 @@ a.page {
     margin-right: 15px;
 }
 
-#stats {
-    width: 360px;
-    margin-left: 725px;
-    margin-right: auto;
-}
-
-.statsPanel {
-    margin-top: 10px;
-    padding-right: 5px;
-    border: thin #eeeeee solid;
-}
-
-.statsList {
-    margin-top: 10px;
-    height: 110px;
-    overflow: auto;
-}
-
 #stats h2 {
     font-weight: bold;
     color: gray;
@@ -156,19 +136,45 @@ a.page {
     margin-left: 10px;
     margin-top: 5px;
     margin-bottom: 2px;
-    font-family: 'Slackey';
 }
 
-
-
-#usersDaily {
+.statsPanel {
+    vertical-align: top;
 }
 
-#robotsDaily {
-}
-
-#articlesDaily {
+.statsPanel ol {
 }
 
 #articlesHourly {
+    width: 35%;
+    float: left;
+    display: inline;
+    margin-left: 15%;
+    margin-right: auto;
+}
+
+#articlesDaily {
+    width: 35%;
+    margin-left: auto;
+    margin-right: 15%;
+}
+
+#usersDaily {
+    clear: both;
+    float: left;
+    width: 35%;
+    margin-left: 15%;
+    margin-right: auto;
+}
+
+#robotsDaily {
+    width: 35%;
+    margin-left: auto;
+    margin-right: 15%;
+}
+
+#about {
+    font-size: 12pt;
+    margin-left: 20%;
+    margin-right: 20%;
 }
