@@ -118,6 +118,9 @@ var io = sio.listen(app);
 
 io.configure('production', function() {
     io.set('log level', 2);
+    // disabled websocket since it doesn't seem to work with node http-proxy
+    // which I am using on inkdroid.org to partition traffic YMMV
+    io.set('transports', ['flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 });
 
 updates.subscribe('wikipedia');
