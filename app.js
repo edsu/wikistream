@@ -117,13 +117,13 @@ app.listen(3000);
 var io = sio.listen(app);
 
 io.configure('production', function() {
-    io.set('log level', 2);
+  io.set('log level', 2);
 });
 
 updates.subscribe('wikipedia');
 
 io.sockets.on('connection', function(socket) {
-    updates.on("message", function (channel, message) {
-        socket.send(message);
-    });
+  updates.on("message", function (channel, message) {
+    socket.send(message);
+  });
 });
