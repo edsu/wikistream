@@ -53,11 +53,9 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
-/*
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });
-*/
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
@@ -117,7 +115,10 @@ app.listen(3000);
 var io = sio.listen(app);
 
 io.configure('production', function() {
-  io.set('log level', 2);
+    io.set('log level', 2);
+    // disabled websocket since it doesn't seem to work with node http-proxy
+    // which I am using on inkdroid.org to partition traffic YMMV
+    io.set('transports', ['flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 });
 
 updates.subscribe('wikipedia');

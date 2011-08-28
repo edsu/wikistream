@@ -13,6 +13,7 @@ header {
     width: 350px;
     color: gray;
     padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 header span.wikistream {
@@ -31,7 +32,7 @@ header img {
 }
 
 #updatePanel {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     height: 825px;
@@ -61,10 +62,10 @@ header img {
 
 #deltaControl {
     width: 275px;
+    text-align: right;
 }
 
 #deltaLabel {
-    margin-left: 5px;
 }
 
 #deltaLimit {
@@ -122,6 +123,7 @@ header img {
 .delta {
     color: gray;
     font-size: 8pt;
+    float: right;
 }
 
 a.page {
