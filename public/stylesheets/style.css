@@ -1,6 +1,6 @@
 body {
-  margin: 0;
-  font: 10pt "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding-left: 50px;
+    font: 10pt "Courier New";
 }
 
 a {
@@ -8,16 +8,17 @@ a {
 }
 
 header {
-  margin-left: auto;
-  margin-right: auto;
-  width: 350px;
-  font-family: 'Slackey';
-  color: gray;
-  padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+    color: gray;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 header span.wikistream {
-  font-size: 20pt;
+    font-size: 20pt;
+    font-weight: bold;
 }
 
 header span.pauseInfo {
@@ -31,21 +32,19 @@ header img {
 }
 
 #updatePanel {
-    margin-top: 10px;
-    margin-left: 50px;
-    height: 850px;
-    width: 650px;
-    float: left;
-    border: thin #eeeeee solid;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 825px;
+    width: 800px;
+    border: thin gray solid;
+    padding: 3px;
+    background-color: #eeeeee;
 }
 
 #controls {
     margin-bottom: 10px;
-    font-family: 'Slackey';
-    color: gray;
     width: 100%;
-    padding: 3px;
-    border-bottom: thin #eeeeee solid;
 }
 
 #wikis {
@@ -55,18 +54,18 @@ header img {
 } 
 
 #slider {
-    width: 75px;
+    width: 50px;
     float: left;
     margin-left: 5px;
     vertical-align: middle;
 }
 
 #deltaControl {
-    width: 270px;
+    width: 275px;
+    text-align: right;
 }
 
 #deltaLabel {
-    margin-left: 5px;
 }
 
 #deltaLimit {
@@ -79,6 +78,7 @@ header img {
 .update a {
     font-size: 13pt;
     color: black;
+    margin-left: 5px;
 }
 
 .update {
@@ -100,7 +100,7 @@ header img {
 
 .lang {
     margin-right: 10px;
-    font-family: Courier;
+    /*font-family: Courier;*/
     font-weight: bold;
 }
 
@@ -123,28 +123,11 @@ header img {
 .delta {
     color: gray;
     font-size: 8pt;
+    float: right;
 }
 
 a.page {
     margin-right: 15px;
-}
-
-#stats {
-    width: 360px;
-    margin-left: 725px;
-    margin-right: auto;
-}
-
-.statsPanel {
-    margin-top: 10px;
-    padding-right: 5px;
-    border: thin #eeeeee solid;
-}
-
-.statsList {
-    margin-top: 10px;
-    height: 110px;
-    overflow: auto;
 }
 
 #stats h2 {
@@ -155,19 +138,45 @@ a.page {
     margin-left: 10px;
     margin-top: 5px;
     margin-bottom: 2px;
-    font-family: 'Slackey';
 }
 
-
-
-#usersDaily {
+.statsPanel {
+    vertical-align: top;
 }
 
-#robotsDaily {
-}
-
-#articlesDaily {
+.statsPanel ol {
 }
 
 #articlesHourly {
+    width: 35%;
+    float: left;
+    display: inline;
+    margin-left: 15%;
+    margin-right: auto;
+}
+
+#articlesDaily {
+    width: 35%;
+    margin-left: auto;
+    margin-right: 15%;
+}
+
+#usersDaily {
+    clear: both;
+    float: left;
+    width: 35%;
+    margin-left: 15%;
+    margin-right: auto;
+}
+
+#robotsDaily {
+    width: 35%;
+    margin-left: auto;
+    margin-right: 15%;
+}
+
+#about {
+    font-size: 12pt;
+    margin-left: 20%;
+    margin-right: 20%;
 }

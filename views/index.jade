@@ -1,21 +1,32 @@
-header
-  img(src="/images/wikipedia.png")
-  span(class='wikistream') wikistream
-  br
-  span(class='pauseInfo') Press "p" to pause
-
-a(href="http://github.com/edsu/wikistream")
-  img(style="position: absolute; top: 0; right: 0; border: 0; z-index: 3;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
-
 div(id="updatePanel")
   table(id="controls")
     tr
-      td Filters
       td
         select(name="wikis")
           option(value="all") All Wikipedias
           - for (var i in wikisSorted)
             option(value="#{wikisSorted[i]}")= wikis[wikisSorted[i]].long
+      td(id="namespaceControl")
+        select(name="namespace")
+          option(value="all") All Namespaces
+          option(value="article") Article
+          option(value="category") Category
+          option(value="category talk") Category Talk 
+          option(value="file") File 
+          option(value="file talk") File Talk 
+          option(value="help") Help
+          option(value="help talk") Help Talk 
+          option(value="media") Media 
+          option(value="mediawiki") MediaWiki 
+          option(value="mediawiki talk") MediaWiki Talk 
+          option(value="project talk") Project Talk 
+          option(value="special") Special
+          option(value="talk") Talk 
+          option(value="template") Template 
+          option(value="template talk") Template Talk
+          option(value="user") User 
+          option(value="user talk") User Talk
+          option(value="wikipedia") Wikipedia
       td 
         input(type="checkbox", name="user", checked="true")
         img(src="/images/person.png", title="Wikipedia User")
@@ -29,21 +40,3 @@ div(id="updatePanel")
         span(id="deltaLimit") 0
         
   div(id='updates')
-
-div(id="stats")
-
-  div(class="statsPanel")
-    h2 Trending Articles (Current Hour)
-    ol(id="articlesHourly", class="statsList")
-
-  div(class="statsPanel")
-    h2 Trending Articles Today
-    ol(id="articlesDaily", class="statsList")
-
-  div(class="statsPanel") 
-    h2 Top Editors Today
-    ol(id="usersDaily", class="statsList")
-
-  div(class="statsPanel")
-    h2 Top Robots Today
-    ol(id="robotsDaily", class="statsList")

@@ -3,10 +3,10 @@
 var fs = require('fs'),
     sys = require('sys'),
     path = require('path'),
+    redis = require('redis'),
     sio = require('socket.io'),
-    express = require('express'),
-    stats = require('redis').createClient(),
-    updates = require('redis').createClient();
+    express = require('express');
+
 
 
 // little helper to package up zrevrange redis query results
@@ -69,10 +69,24 @@ app.get('/', function(req, res){
   });
 });
 
+app.get('/trends/', function(req, res){
+  res.render('trends', {
+    title: 'wikistream daily trends',
+  });
+});
+
+app.get('/about/', function(req, res){
+  res.render('about', {
+    title: 'about wikistream',
+  });
+});
+
 // TODO: might be able to create one stats view that does all these?
 
+stats = redis.createClient(),
+
 app.get('/stats/users-daily.json', function(req, res){
-  stats.zrevrange(['users-daily', 0, 99, 'withscores'], function (e, r) {
+  stats.zrevrange(['users-daily', 0, 99, 'withscores'], function(e, r) {
     res.send(zresults(r));
   });
 });
@@ -100,9 +114,24 @@ app.listen(3000);
 
 // set up the socket.io update stream
 
-var socket = sio.listen(app);
+var io = sio.listen(app);
 
-updates.subscribe('wikipedia');
-updates.on("message", function (channel, message) {
-    socket.broadcast(message);
+io.configure('production', function() {
+  io.set('log level', 2);
+  // disabled websocket since it doesn't seem to work with node http-proxy
+  // which I am using on inkdroid.org to partition traffic YMMV
+  io.set('transports', ['flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 });
+
+io.sockets.on('connection', function(socket) {
+  var updates = redis.createClient();
+  updates.subscribe('wikipedia');
+  updates.on("message", function (channel, message) {
+    socket.send(message);
+  });
+  socket.on('disconnect', function() {
+    updates.quit();
+  });
+});
+
+

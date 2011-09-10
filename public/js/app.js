@@ -3,14 +3,14 @@ $(document).ready(init);
 var pause = false;
 var deltaLimit = 0;
 var wikipediaLimit = "all";
+var namespaceLimit = "all";
 var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
 
 function init() {
   setupControls();
-  var socket = new io.Socket();
-  socket.connect();
+  var socket = io.connect();
   socket.on('message', function(data) {
     var msg = jQuery.parseJSON(data);
 
@@ -18,6 +18,7 @@ function init() {
     if (pause) return;
     if (! wikipediaFilter(msg)) return;
     if (! userFilter(msg)) return;
+    if (! namespaceFilter(msg)) return;
     if (Math.abs(msg.delta) < deltaLimit) return;
 
     // update the stream
@@ -25,14 +26,12 @@ function init() {
     removeOld();
   });
   stats();
-  $(window).blur(togglePause);
-  $(window).focus(togglePause);
 }
 
 function addUpdate(msg) {
   var lang = $('<span>').attr({'class': 'lang'}).text('[' + msg.wikipediaShort + ']');
   var a = $('<a>').attr({'class': 'page', 'href': msg.url, 'title': msg.comment, target: '_new'}).text(msg.page);
-  var delta = $('<span>').attr({'class': 'delta'}).text(msg.delta);
+  var delta = $('<span>').attr({'class': 'delta'}).text(msg.delta >=0 ? "+" + msg.delta : msg.delta);
 
   updateClasses = ['update'];
   if (msg.newPage) updateClasses.push('newPage');
@@ -120,15 +119,24 @@ function setupControls() {
       includeAnonymous = checked;
     }
   });
+  $('select[name="namespace"]').change(function() {
+    namespaceLimit = ($('select[name="namespace"]').val());
+  });
 
   $(document).bind('keyup', 'p', togglePause);
   $(document).bind('keyup', 'pause', togglePause);
 }
 
 function wikipediaFilter(msg) {
-    if (wikipediaLimit == "all") return true;
-    if (wikipediaLimit == msg.wikipedia) return true;
-    return false;
+  if (wikipediaLimit == "all") return true;
+  if (wikipediaLimit == msg.wikipedia) return true;
+  return false;
+}
+
+function namespaceFilter(msg) {
+  if (namespaceLimit == "all") return true;
+  if (namespaceLimit == msg.namespace) return true;
+  return false;
 }
 
 function userFilter(msg) {
@@ -150,20 +158,20 @@ function stats() {
     }
 
     $.getJSON('/stats/articles-hourly.json', function (d) {
-        $("#articlesHourly").empty();
-        add_stats("#articlesHourly", d);
+        $("#articlesHourly ol").empty();
+        add_stats("#articlesHourly ol", d);
     });
     $.getJSON('/stats/articles-daily.json', function (d) {
-        $("#articlesDaily").empty();
-        add_stats("#articlesDaily", d);
+        $("#articlesDaily ol").empty();
+        add_stats("#articlesDaily ol", d);
     });
     $.getJSON('/stats/users-daily.json', function (d) {
-        $("#usersDaily").empty();
-        add_stats("#usersDaily", d);
+        $("#usersDaily ol").empty();
+        add_stats("#usersDaily ol", d);
     });
     $.getJSON('/stats/robots-daily.json', function (d) {
-        $("#robotsDaily").empty();
-        add_stats("#robotsDaily", d);
+        $("#robotsDaily ol").empty();
+        add_stats("#robotsDaily ol", d);
     });
 
     setTimeout(stats, 10000);
