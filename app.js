@@ -133,5 +133,3 @@ io.sockets.on('connection', function(socket) {
     updates.quit();
   });
 });
-
-
