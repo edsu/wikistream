@@ -7,6 +7,7 @@ var namespaceLimit = "all";
 var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
+var lastBackgroundChange = new Date();
 
 function init() {
   setupControls();
@@ -49,7 +50,12 @@ function addUpdate(msg) {
   $('#updates').prepend(d);
   d.slideDown('medium');
 
-  if (msg.wikipediaShort && msg.page.match('File:') && msg.page.match(/(png|jpg)$/i)) {
+  // update background with wikimedia commons image
+  if (msg.wikipediaShort 
+          && msg.page.match('File:') 
+          && msg.page.match(/(png|jpg)$/i)
+          && new Date() - lastBackgroundChange > 1500) {
+    lastBackgroundChange = new Date();
     url = "/commons-image/" + encodeURIComponent(msg.page);
     $.getJSON(url, function(imageInfo) {
       for (pageId in imageInfo['query']['pages']) break;
