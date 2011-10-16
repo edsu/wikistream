@@ -12,8 +12,12 @@ header {
     margin-right: auto;
     width: 350px;
     color: gray;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    opacity: 0.5;
+    background-color: white;
+    border-radius: 15px;
 }
 
 header span.wikistream {
@@ -40,6 +44,7 @@ header img {
     border: thin gray solid;
     padding: 3px;
     background-color: #eeeeee;
+    opacity: 0.7;
 }
 
 #controls {

@@ -2,6 +2,7 @@
 
 var fs = require('fs'),
     sys = require('sys'),
+    http = require('http'),
     path = require('path'),
     redis = require('redis'),
     sio = require('socket.io'),
@@ -65,19 +66,45 @@ app.get('/', function(req, res){
   res.render('index', {
     title: 'wikistream',
     wikis: config.wikipedias,
-    wikisSorted: wikisSorted
+    wikisSorted: wikisSorted,
+    stream: true,
+    trends: false
+  });
+});
+
+app.get('/commons-image/:page', function(req, res){
+  var path = "/w/api.php?action=query&titles=" + 
+             encodeURIComponent(req.params.page) + 
+             "&prop=imageinfo&iiprop=url&format=json";
+  var opts = {
+    headers: {'User-Agent': 'wikistream'},
+    host: 'commons.wikimedia.org',
+    path: path
+  };
+  http.get(opts, function(response) {
+    //res.header('Content-Type', 'application/json');
+    response.on('data', function(chunk) {
+      res.write(chunk);
+    });
+    response.on('end', function() {
+      res.end();
+    });
   });
 });
 
 app.get('/trends/', function(req, res){
   res.render('trends', {
     title: 'wikistream daily trends',
+    stream: false,
+    trends: true
   });
 });
 
 app.get('/about/', function(req, res){
   res.render('about', {
     title: 'about wikistream',
+    stream: false,
+    trends: false
   });
 });
 

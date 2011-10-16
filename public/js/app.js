@@ -25,13 +25,16 @@ function init() {
     addUpdate(msg);
     removeOld();
   });
-  stats();
 }
 
 function addUpdate(msg) {
   var lang = $('<span>').attr({'class': 'lang'}).text('[' + msg.wikipediaShort + ']');
   var a = $('<a>').attr({'class': 'page', 'href': msg.url, 'title': msg.comment, target: '_new'}).text(msg.page);
-  var delta = $('<span>').attr({'class': 'delta'}).text(msg.delta >=0 ? "+" + msg.delta : msg.delta);
+  var delta;
+  if (msg.delta == null) delta = "n/a";
+  else if (msg.delta < 0) delta = msg.delta;
+  else delta = "+" + msg.delta;
+  delta = $('<span>').attr({'class': 'delta'}).text(delta);
 
   updateClasses = ['update'];
   if (msg.newPage) updateClasses.push('newPage');
@@ -45,6 +48,15 @@ function addUpdate(msg) {
     .hide();
   $('#updates').prepend(d);
   d.slideDown('medium');
+
+  if (msg.wikipediaShort && msg.page.match('File:') && msg.page.match(/(png|jpg)$/i)) {
+    url = "/commons-image/" + encodeURIComponent(msg.page);
+    $.getJSON(url, function(imageInfo) {
+      for (pageId in imageInfo['query']['pages']) break;
+      imageUrl = imageInfo['query']['pages'][pageId]['imageinfo'][0]['url'];
+      $("body").css('background-image', 'url(' + imageUrl + ')');
+    });
+  }
 }
 
 function removeOld() {
@@ -148,32 +160,4 @@ function userFilter(msg) {
     return false;
   }
   return true;
-}
-
-function stats() {
-
-  function add_stats(id, d) {
-    for (var i in d) {
-      $(id).append($('<li>').append($('<a>').attr({href: d[i].url, target: "_new"}).text(d[i].name + " [" + d[i].wikipedia + "] (" + d[i].score + ")")))
-    }
-  }
-
-  $.getJSON('/stats/articles-hourly.json', function (d) {
-    $("#articlesHourly ol").empty();
-    add_stats("#articlesHourly ol", d);
-  });
-  $.getJSON('/stats/articles-daily.json', function (d) {
-    $("#articlesDaily ol").empty();
-    add_stats("#articlesDaily ol", d);
-  });
-  $.getJSON('/stats/users-daily.json', function (d) {
-    $("#usersDaily ol").empty();
-      add_stats("#usersDaily ol", d);
-  });
-  $.getJSON('/stats/robots-daily.json', function (d) {
-    $("#robotsDaily ol").empty();
-    add_stats("#robotsDaily ol", d);
-  });
-
-  setTimeout(stats, 10000);
 }

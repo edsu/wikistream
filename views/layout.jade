@@ -5,13 +5,18 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/smoothness/jquery-ui-1.8.13.custom.css')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Slackey', rel='stylesheet')
-
-    script(src='http://inkdroid.org:3000/socket.io/socket.io.js')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js')
-    script(src='/js/jquery.hotkeys.js')
-    script(src='/js/app.js')
-    script(src='/js/jquery.blockUI.js')
-    script(src='/js/jquery-ui.js')
+
+    - if (stream)
+        script(src='http://inkdroid.org:3000/socket.io/socket.io.js')
+        script(src='/js/jquery.hotkeys.js')
+        script(src='/js/app.js')
+        script(src='/js/jquery.blockUI.js')
+        script(src='/js/jquery-ui.js')
+
+    - if (trends)
+        script(src="/js/trends.js")
+
     script(type="text/javascript")
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-16871278-3']);
