@@ -50,11 +50,11 @@ function addUpdate(msg) {
   $('#updates').prepend(d);
   d.slideDown('medium');
 
-  // update background with wikimedia commons image
+  // update background with wikimedia commons image, but not too often
   if (msg.wikipediaShort 
           && msg.page.match('File:') 
           && msg.page.match(/(png|jpg)$/i)
-          && new Date() - lastBackgroundChange > 1500) {
+          && new Date() - lastBackgroundChange > 1000 * 10) {
     lastBackgroundChange = new Date();
     url = "/commons-image/" + encodeURIComponent(msg.page);
     $.getJSON(url, function(imageInfo) {
