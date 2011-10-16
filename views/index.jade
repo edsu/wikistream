@@ -5,7 +5,7 @@ div(id="updatePanel")
         select(name="wikis")
           option(value="all") All Wikipedias
           - for (var i in wikisSorted)
-            option(value="#{wikisSorted[i]}")= wikis[wikisSorted[i]].long
+            option(value="#{wikisSorted[i]}")= wikis[wikisSorted[i]].long + " [" + wikis[wikisSorted[i]].short + "]"
       td(id="namespaceControl")
         select(name="namespace")
           option(value="all") All Namespaces
