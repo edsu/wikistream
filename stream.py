@@ -44,6 +44,7 @@ from requests import post, get
 
 def wikipedia_updates(callback):
     endpoint = "http://wikistream.inkdroid.org/socket.io/1"
+    endpoint = "http://localhost:3000/socket.io/1"
     session_id = post(endpoint).content.split(':')[0]
     xhr_endpoint = "/".join((endpoint, "xhr-polling", session_id))
 
@@ -60,6 +61,6 @@ def wikipedia_updates(callback):
 
 if __name__ == "__main__":
     def print_page(update): 
-        print update['page']
+        print update
 
     wikipedia_updates(print_page)

@@ -32,11 +32,15 @@ function main() {
 
 function parse_msg (msg) {
   // i guess this means i have two problems now? :-D
-  var m = /\x0314\[\[\x0307(.+?)\x0314\]\]\x034 (.*?)\x0310.*\x0302(http.+?)\x03.+\x0303(.+?)\x03.+\x03 (.+) \x0310(.+)\x03/.exec(msg[1]);
-  if (! m) { return null; } 
+  var m = /\x0314\[\[\x0307(.+?)\x0314\]\]\x034 (.*?)\x0310.*\x0302(.*?)\x03.+\x0303(.+?)\x03.+\x03 (.*) \x0310(.*)\x03?.*/.exec(msg[1]);
+  if (! m) { console.log(msg); return null; } 
 
   // convert change in characters to a (possibly negative) integer
-  var delta = parseInt(/([+-]\d+)/.exec(m[5])[1]);
+  if (m[5]) {
+    var delta = parseInt(/([+-]\d+)/.exec(m[5])[1]);
+  } else {
+    var delta = null;
+  }
 
   // see if it looks like an anonymous edit
   var user = m[4];
@@ -81,7 +85,7 @@ function processMessage (msg) {
   if (m) {
     redis.publish('wikipedia', JSON.stringify(m));
     stats(m);
-    console.log(m.page + " -- " + m.namespace);
+    console.log(m.page + " -- " + m.wikipediaShort);
   }
 }
 
