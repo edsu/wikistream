@@ -7,7 +7,8 @@ var namespaceLimit = "all";
 var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
-var lastBackgroundChange = new Date();
+var backgroundTimeout = 1000 * 7;
+var lastBackgroundChange = new Date() - backgroundTimeout;
 
 function init() {
   setupControls();
@@ -54,7 +55,7 @@ function addUpdate(msg) {
   if (msg.wikipediaShort 
           && msg.page.match('File:') 
           && msg.page.match(/(png|jpg)$/i)
-          && new Date() - lastBackgroundChange > 1000 * 10) {
+          && new Date() - lastBackgroundChange > backgroundTimeout) {
     lastBackgroundChange = new Date();
     url = "/commons-image/" + encodeURIComponent(msg.page);
     $.getJSON(url, function(imageInfo) {
