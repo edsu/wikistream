@@ -144,7 +144,9 @@ function setupControls() {
     namespaceLimit = ($('select[name="namespace"]').val());
   });
   $('input[name="background"]').change(function() {
-      showBackground = ! showBackground;
+    showBackground = ! showBackground;
+    if (! showBackground) 
+      $("body").css('background-image', null);
   });
 
   $(document).bind('keyup', 'p', togglePause);
