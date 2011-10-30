@@ -146,7 +146,7 @@ function setupControls() {
   $('input[name="background"]').change(function() {
     showBackground = ! showBackground;
     if (! showBackground) 
-      $("body").css('background-image', null);
+      $("body").css('background-image', '');
   });
 
   $(document).bind('keyup', 'p', togglePause);
