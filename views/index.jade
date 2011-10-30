@@ -2,7 +2,7 @@ div(id="updatePanel")
   table(id="controls")
     tr
       td
-        select(name="wikis")
+        select(id="wikis", name="wikis")
           option(value="all") All Wikipedias
           - for (var i in wikisSorted)
             option(value="#{wikisSorted[i]}")= wikis[wikisSorted[i]].long + " [" + wikis[wikisSorted[i]].short + "]"
@@ -34,6 +34,8 @@ div(id="updatePanel")
         img(src="/images/robot.png", title="Wikipedia Robot")
         input(type="checkbox", name="anonymous", checked="true")
         img(src="/images/question.png", title="Anonymous User")
+        input(type="checkbox", name="background", checked="true")
+        img(src="/images/images.png", title="Set background to a recent Wikimedia Commons image.")
       td(id="deltaControl")
         span(id="slider")
         span(id="deltaLabel") Edit Size (Chars): ± 

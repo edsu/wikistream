@@ -8,6 +8,7 @@ var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
 var backgroundTimeout = 1000 * 7;
+var showBackground = true;
 var lastBackgroundChange = new Date() - backgroundTimeout;
 
 function init() {
@@ -53,6 +54,7 @@ function addUpdate(msg) {
 
   // update background with wikimedia commons image, but not too often
   if (msg.wikipediaShort 
+          && showBackground
           && msg.page.match('File:') 
           && msg.page.match(/(png|jpg)$/i)
           && new Date() - lastBackgroundChange > backgroundTimeout) {
@@ -140,6 +142,9 @@ function setupControls() {
   });
   $('select[name="namespace"]').change(function() {
     namespaceLimit = ($('select[name="namespace"]').val());
+  });
+  $('input[name="background"]').change(function() {
+      showBackground = ! showBackground;
   });
 
   $(document).bind('keyup', 'p', togglePause);

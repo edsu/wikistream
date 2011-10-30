@@ -186,3 +186,7 @@ a.page {
     margin-left: 20%;
     margin-right: 20%;
 }
+
+select#wikis {
+    width: 175px;
+}
