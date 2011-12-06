@@ -60,7 +60,7 @@ app.configure('development', function(){
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
-  app.use(express.static(__dirname + '/public', {maxAge: 60*15}));
+  app.use(express.static(__dirname + '/public', {maxAge: 60*15*1000}));
 });
 
 app.get('/', function(req, res){
