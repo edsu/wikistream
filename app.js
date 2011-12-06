@@ -55,12 +55,12 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-  app.use(express.static(__dirname + '/public'), {maxAge: 60*15});
+  app.use(express.static(__dirname + '/public'));
 });
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
-  app.use(express.static(__dirname + '/public'), {maxAge: 60*15});
+  app.use(express.static(__dirname + '/public', {maxAge: 60*15}));
 });
 
 app.get('/', function(req, res){
