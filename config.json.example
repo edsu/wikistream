@@ -469,7 +469,7 @@
     }, 
     "#sk.wikipedia": {
       "short": "sk", 
-      "long": "Slovak Wikipedia", 
+      "long": "Slovenian Wikipedia", 
       "namespaces": {
         "Diskusia k pomoci": "help talk", 
         "MediaWiki": "mediawiki", 
