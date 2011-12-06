@@ -51,15 +51,16 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+  app.use(express.static(__dirname + '/public'), {maxAge: 60*15});
 });
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
+  app.use(express.static(__dirname + '/public'), {maxAge: 60*15});
 });
 
 app.get('/', function(req, res){

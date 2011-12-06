@@ -293,7 +293,7 @@
     }, 
     "#sl.wikipedia": {
       "short": "sl", 
-      "long": "Solvenian Wikipedia", 
+      "long": "Slovene Wikipedia", 
       "namespaces": {
         "MediaWiki": "mediawiki", 
         "Slika": "file", 
@@ -469,7 +469,7 @@
     }, 
     "#sk.wikipedia": {
       "short": "sk", 
-      "long": "Slovenian Wikipedia", 
+      "long": "Slovak Wikipedia", 
       "namespaces": {
         "Diskusia k pomoci": "help talk", 
         "MediaWiki": "mediawiki", 
