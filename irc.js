@@ -3,11 +3,7 @@ var fs = require('fs'),
     irc = require('irc-js'),
     redis = require('redis').createClient();
 
-// read the config
-configFile = path.join(__dirname, 'config.json');
-config = JSON.parse(fs.readFileSync(configFile))
-
-function main() {
+function listen(config, callback) {
   channels = [];
   for (var chan in config.wikipedias) { channels.push(chan); }
 
@@ -23,14 +19,20 @@ function main() {
 
   client.connect(function () {
     client.join(channels);
-    client.on('privmsg', processMessage);
+    client.on('privmsg', function(msg) { 
+      m = parse_msg(msg.params, config);
+      if (m) {
+        callback(m);
+        stats(m);
+      }
+    });
   });
 
   setDailyStatsTimeout();  
   setHourlyStatsTimeout();
 }
 
-function parse_msg (msg) {
+function parse_msg(msg, config) {
   // i guess this means i have two problems now? :-D
   var m = /\x0314\[\[\x0307(.+?)\x0314\]\]\x034 (.*?)\x0310.*\x0302(.*?)\x03.+\x0303(.+?)\x03.+\x03 (.*) \x0310(.*)\x03?.*/.exec(msg[1]);
   if (! m) { 
@@ -60,7 +62,7 @@ function parse_msg (msg) {
   var wikipediaUrl = 'http://' + wikipedia.replace('#', '') + '.org';
   var pageUrl = wikipediaUrl + '/wiki/' + page.replace(/ /g, '_');
   var userUrl = wikipediaUrl + '/wiki/User:' + user;
-  var namespace = getNamespace(wikipedia, page);
+  var namespace = getNamespace(wikipedia, page, config);
 
   return {
     flag: flag, 
@@ -83,22 +85,13 @@ function parse_msg (msg) {
   }
 }
 
-function processMessage (msg) {
-  m = parse_msg(msg.params);
-  if (m) {
-    redis.publish('wikipedia', JSON.stringify(m));
-    stats(m);
-    console.log(m.page + " -- " + m.wikipediaShort);
-  }
-}
-
-function stats (msg) {
+function stats(msg) {
   dailyStats(msg);
   hourlyStats(msg);
   permStats(msg);
 }
 
-function dailyStats (msg) {
+function dailyStats(msg) {
   redis.zincrby('wikipedias-daily', 1, msg.wikipedia);
   if (msg.namespace == "article") {
     redis.zincrby('articles-daily', 1, JSON.stringify(
@@ -114,7 +107,7 @@ function dailyStats (msg) {
   }
 }
 
-function setDailyStatsTimeout () {
+function setDailyStatsTimeout() {
   var t = new Date();
   var elapsed = t.getUTCHours() * 60 * 60 
                 + t.getUTCMinutes() * 60 
@@ -123,7 +116,7 @@ function setDailyStatsTimeout () {
   setTimeout(resetDailyStats, remaining * 1000);
 }
 
-function resetDailyStats () {
+function resetDailyStats() {
   console.log("resetting daily stats");
   redis.del('articles-daily');
   redis.del('robots-daily');
@@ -132,27 +125,27 @@ function resetDailyStats () {
   setDailyStatsTimeout();
 }
 
-function hourlyStats (msg) {
+function hourlyStats(msg) {
   if (msg.namespace == "article") {
     redis.zincrby('articles-hourly', 1, JSON.stringify(
       {name: msg.page, 'url': msg.pageUrl, 'wikipedia': msg.wikipediaShort}));
   }
 }
 
-function setHourlyStatsTimeout () {
+function setHourlyStatsTimeout() {
   var t = new Date();
   var elapsed = t.getUTCMinutes() * 60 + t.getUTCSeconds();
   var remaining = 60 * 60 - elapsed;
   setTimeout(resetHourlyStats, remaining * 1000);
 }
 
-function resetHourlyStats () {
+function resetHourlyStats() {
   console.log("resetting daily stats");
   redis.del('articles-hourly');
   setHourlyStatsTimeout();
 }
 
-function permStats (msg) {
+function permStats(msg) {
   if (msg.robot) {
     redis.zincrby('robots', 1, msg.user);
   }
@@ -161,7 +154,7 @@ function permStats (msg) {
   }
 }
 
-function getNamespace (wikipedia, page) {
+function getNamespace(wikipedia, page, config) {
   ns = null;
   var parts = page.split(':');
   if (parts.length > 1 && parts[1][0] != " ") {
@@ -172,5 +165,5 @@ function getNamespace (wikipedia, page) {
   }
   return ns;
 }
- 
-main();
+
+exports.listen = listen;

@@ -14,9 +14,8 @@ var lastBackgroundChange = new Date() - backgroundTimeout;
 function init() {
   setupControls();
   var socket = io.connect();
-  socket.on('message', function(data) {
-    var msg = jQuery.parseJSON(data);
-
+  socket.on('message', function(msg) {
+    
     // apply filters
     if (pause) return;
     if (! wikipediaFilter(msg)) return;

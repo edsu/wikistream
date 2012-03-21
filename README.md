@@ -1,4 +1,4 @@
-wikistream is a barebones webapp for helping visualize current editing
+wikistream is a Node webapp for helping visualize current editing
 activity in wikipedia. It uses node.js, socket.io and redis to sit in the
 wikimedia IRC chat rooms (where updates are published), and makes them available
 on the Web in realtime.
@@ -18,28 +18,21 @@ You may want to adjust the ircNick that is in the example to something unique,
 so that you will be able to join the channels without a collision. Also you 
 can adjust the wkipedia language channels that are being monitored.
 
-To run the app you'll first need to fetch wikipedia updates from IRC and 
-feed them to redis:
-
-    node updates.js
-
-next, start the webapp;
+Then, start the webapp;
 
     node app.js
 
-and point your browser at:
+wait 10-15 seconds for the app to join the irc channels, and then
+point your browser at:
 
     http://localhost:3000/
 
-Upstart scripts are included, which you should be able to install and use. Just
-make sure that you edit them so that they really point at where you have
+An Upstart script is included, which you should be able to install and use. Just
+make sure that you edit it so that they really point at where you have
 installed node and checked out the wikistream code.
 
     cp wikistream.conf /etc/init/wikistream.conf
     start wikistream
-
-    cp wikistream-irc.conf /etc/init/wikistream-irc.conf
-    start wikistream-irc
 
 The icons were created by Delphine Ménard, and are separately available at:
 
