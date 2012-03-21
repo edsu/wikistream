@@ -27,6 +27,11 @@ point your browser at:
 
     http://localhost:3000/
 
+If you would like wikistream to run on port 80 you can bless node to bind to
+port 80 with setcap, e.g.
+
+    sudo setcap 'cap_net_bind_service=+ep' /opt/node/bin/node
+
 An Upstart script is included, which you should be able to install and use. Just
 make sure that you edit it so that they really point at where you have
 installed node and checked out the wikistream code.

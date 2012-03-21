@@ -124,7 +124,7 @@ app.get('/stats/robots-daily.json', function (req, res){
   });
 });
 
-app.listen(3000);
+app.listen(config.port);
 
 
 // set up socket.io to stream the irc updates

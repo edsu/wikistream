@@ -3,6 +3,7 @@
   "ircUserName": "wikistream-bot", 
   "ircRealName": "http://github.com/edsu/wikistream", 
   "log": false, 
+  "port": 3000,
   "wikipedias": {
     "#vo.wikipedia": {
       "short": "vo", 
