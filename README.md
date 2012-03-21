@@ -10,7 +10,7 @@ Installation:
 * install [npm](http://npmjs.org/)
 * npm install
 
-Next you'll want to use and/or adjust the default configuration:
+Next you''ll want to use and/or adjust the default configuration:
 
     cp config.json.example config.json
 

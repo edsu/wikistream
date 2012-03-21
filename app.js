@@ -147,8 +147,10 @@ io.configure('production', function () {
 
 io.sockets.on('connection', function (socket) {
   sockets.push(socket);
+  console.log("adding a socket, now " + sockets.length + ' total');
   socket.on('disconnect', function () {
     sockets = _.without(sockets, socket);
+    console.log("removing a socket, now " + sockets.length + ' total');
   });
 });
 
