@@ -7,7 +7,7 @@ var namespaceLimit = "all";
 var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
-var backgroundTimeout = 1000 * 7;
+var backgroundTimeout = 1000 * 5;
 var showBackground = true;
 var lastBackgroundChange = new Date() - backgroundTimeout;
 
@@ -55,14 +55,14 @@ function addUpdate(msg) {
   if (msg.wikipediaShort 
           && showBackground
           && msg.page.match('File:') 
-          && msg.page.match(/(png|jpg)$/i)
-          && new Date() - lastBackgroundChange > backgroundTimeout) {
-    lastBackgroundChange = new Date();
+          && msg.page.match(/(png|jpg)$/i)) {
     var url = "/commons-image/" + encodeURIComponent(msg.page);
     $.getJSON(url, function(imageInfo) {
       for (pageId in imageInfo['query']['pages']) break;
       var image = imageInfo['query']['pages'][pageId]['imageinfo'][0];
-      if (image['width'] > 200 && image['height'] > 200) {
+      if (image['width'] > 500 
+        && image['height'] > 500
+        && (new Date() - lastBackgroundChange > backgroundTimeout)) {
         $('html').css({
             'background': 'url(' + image['url'] + ') no-repeat center center fixed',
             '-webkit-background-size': 'cover',
@@ -71,6 +71,7 @@ function addUpdate(msg) {
             'background-size': 'cover'
 
         });
+        lastBackgroundChange = new Date();
       }
     });
   }
