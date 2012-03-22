@@ -7,7 +7,7 @@ var namespaceLimit = "all";
 var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
-var backgroundTimeout = 1000 * 10;
+var backgroundTimeout = 1000 * 7;
 var showBackground = true;
 var lastBackgroundChange = new Date() - backgroundTimeout;
 
@@ -63,7 +63,7 @@ function addUpdate(msg) {
       if (image['width'] > 500 
         && image['height'] > 500
         && (new Date() - lastBackgroundChange > backgroundTimeout)) {
-        $.backstretch(image['url'], {speed: 1000});
+        $.backstretch(image['url'], {speed: 1500});
         lastBackgroundChange = new Date();
       }
     });
