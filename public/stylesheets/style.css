@@ -16,9 +16,8 @@ header {
     padding: 5px;
     margin-bottom: 10px;
     margin-top: 10px;
-    opacity: 0.8;
-    background-color: white;
-    border: thin gray solid;
+    opacity: 0.7;
+    background-color: #eeeeee;
 }
 
 header span.wikistream {
@@ -43,10 +42,9 @@ header img {
     margin-right: auto;
     height: 825px;
     width: 800px;
-    border: thin gray solid;
-    padding: 3px;
+    padding: 4px;
     background-color: #eeeeee;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 #controls {
@@ -190,4 +188,11 @@ a.page {
 
 select#wikis {
     width: 175px;
+}
+
+#background {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }

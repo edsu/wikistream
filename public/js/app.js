@@ -7,7 +7,7 @@ var namespaceLimit = "all";
 var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
-var backgroundTimeout = 1000 * 5;
+var backgroundTimeout = 1000 * 10;
 var showBackground = true;
 var lastBackgroundChange = new Date() - backgroundTimeout;
 
@@ -63,14 +63,7 @@ function addUpdate(msg) {
       if (image['width'] > 500 
         && image['height'] > 500
         && (new Date() - lastBackgroundChange > backgroundTimeout)) {
-        $('html').css({
-            'background': 'url(' + image['url'] + ') no-repeat center center fixed',
-            '-webkit-background-size': 'cover',
-            '-moz-background-size': 'cover',
-            '-o-background-size': 'cover',
-            'background-size': 'cover'
-
-        });
+        $.backstretch(image['url'], {speed: 1000});
         lastBackgroundChange = new Date();
       }
     });
