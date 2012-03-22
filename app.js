@@ -63,7 +63,7 @@ app.get('/', function (req, res){
 app.get('/commons-image/:page', function (req, res){
   var path = "/w/api.php?action=query&titles=" + 
              encodeURIComponent(req.params.page) + 
-             "&prop=imageinfo&iiprop=url&format=json";
+             "&prop=imageinfo&iiprop=url|size&format=json";
   var opts = {
     headers: {'User-Agent': 'wikistream'},
     host: 'commons.wikimedia.org',

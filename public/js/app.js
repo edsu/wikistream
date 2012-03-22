@@ -58,11 +58,20 @@ function addUpdate(msg) {
           && msg.page.match(/(png|jpg)$/i)
           && new Date() - lastBackgroundChange > backgroundTimeout) {
     lastBackgroundChange = new Date();
-    url = "/commons-image/" + encodeURIComponent(msg.page);
+    var url = "/commons-image/" + encodeURIComponent(msg.page);
     $.getJSON(url, function(imageInfo) {
       for (pageId in imageInfo['query']['pages']) break;
-      imageUrl = imageInfo['query']['pages'][pageId]['imageinfo'][0]['url'];
-      $("body").css('background-image', 'url(' + imageUrl + ')');
+      var image = imageInfo['query']['pages'][pageId]['imageinfo'][0];
+      if (image['width'] > 200 && image['height'] > 200) {
+        $('html').css({
+            'background': 'url(' + image['url'] + ') no-repeat center center fixed',
+            '-webkit-background-size': 'cover',
+            '-moz-background-size': 'cover',
+            '-o-background-size': 'cover',
+            'background-size': 'cover'
+
+        });
+      }
     });
   }
 }
@@ -77,12 +86,14 @@ function togglePause() {
   pause = ! pause;
   if (pause) {
     $('header').block({ 
-      message: 'Paused<br/>Press \'p\' to unpause', 
-      css: {border: 'none',
-        color: '#fff',
-        backgroundColor: 'transparent',
-        width: '400px'
-      } 
+      message: '<br/>Paused<br/>Press \'p\' to unpause', 
+      css: {
+        'border': 'none',
+        'color': 'black',
+        'opacity': '1',
+        'width': '280px',
+        'height': '70px'
+      }
     });
   } else {
     $('header').unblock();

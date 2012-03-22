@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font: 10pt "Courier New";
+    height: 1000px;
 }
 
 a {
@@ -17,7 +18,7 @@ header {
     margin-top: 10px;
     opacity: 0.8;
     background-color: white;
-    border-radius: 15px;
+    border: thin gray solid;
 }
 
 header span.wikistream {
