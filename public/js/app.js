@@ -53,16 +53,15 @@ function addUpdate(msg) {
 
   // update background with wikimedia commons image, but not too often
   if (msg.wikipediaShort 
-          && showBackground
-          && msg.page.match('File:') 
-          && msg.page.match(/(png|jpg)$/i)) {
+    && showBackground
+    && msg.page.match('File:') 
+    && msg.page.match(/(png|jpg)$/i)
+    && (new Date() - lastBackgroundChange > backgroundTimeout)) {
     var url = "/commons-image/" + encodeURIComponent(msg.page);
     $.getJSON(url, function(imageInfo) {
       for (pageId in imageInfo['query']['pages']) break;
       var image = imageInfo['query']['pages'][pageId]['imageinfo'][0];
-      if (image['width'] > 500 
-        && image['height'] > 500
-        && (new Date() - lastBackgroundChange > backgroundTimeout)) {
+      if (image['width'] > 500 && image['height'] > 500) {
         $.backstretch(image['url'], {speed: 1500});
         lastBackgroundChange = new Date();
       }
