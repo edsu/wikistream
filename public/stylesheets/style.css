@@ -17,7 +17,7 @@ header {
     margin-bottom: 10px;
     margin-top: 10px;
     opacity: 0.7;
-    background-color: #eeeeee;
+    background-color: white; 
 }
 
 header span.wikistream {
@@ -43,7 +43,7 @@ header img {
     height: 825px;
     width: 800px;
     padding: 4px;
-    background-color: #eeeeee;
+    background-color: white;
     opacity: 0.7;
 }
 
