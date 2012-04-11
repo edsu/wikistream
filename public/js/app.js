@@ -7,8 +7,9 @@ var namespaceLimit = "all";
 var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
-var backgroundTimeout = 1000 * 7;
+var backgroundTimeout = 1000 * 10;
 var showBackground = true;
+var fetchingBackground = false;
 var lastBackgroundChange = new Date() - backgroundTimeout;
 
 function init() {
@@ -56,14 +57,20 @@ function addUpdate(msg) {
     && showBackground
     && msg.page.match('File:') 
     && msg.page.match(/(png|jpg)$/i)
+    && ! fetchingBackground
     && (new Date() - lastBackgroundChange > backgroundTimeout)) {
     var url = "/commons-image/" + encodeURIComponent(msg.page);
+    fetchingBackground = true;
     $.getJSON(url, function(imageInfo) {
       for (pageId in imageInfo['query']['pages']) break;
       var image = imageInfo['query']['pages'][pageId]['imageinfo'][0];
       if (image['width'] > 500 && image['height'] > 500) {
-        $.backstretch(image['url'], {speed: 1500});
-        lastBackgroundChange = new Date();
+        $.backstretch(image['url'], {speed: 1500}, function() {
+          lastBackgroundChange = new Date();
+          fetchingBackground = false;
+        });
+      } else {
+        fetchingBackground = false;
       }
     });
   }
