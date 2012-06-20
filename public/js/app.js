@@ -61,15 +61,24 @@ function addUpdate(msg) {
     && (new Date() - lastBackgroundChange > backgroundTimeout)) {
     var url = "/commons-image/" + encodeURIComponent(msg.page);
     fetchingBackground = true;
+    console.log("fetching background image: " + url);
     $.getJSON(url, function(imageInfo) {
       for (pageId in imageInfo['query']['pages']) break;
-      var image = imageInfo['query']['pages'][pageId]['imageinfo'][0];
-      if (image['width'] > 500 && image['height'] > 500) {
-        $.backstretch(image['url'], {speed: 1500}, function() {
-          lastBackgroundChange = new Date();
-          fetchingBackground = false;
-        });
-      } else {
+      try {
+        var image = imageInfo['query']['pages'][pageId]['imageinfo'][0];
+        if (image && image['width'] > 500 && image['height'] > 500 &&
+            image['width'] < 2500 && image['height'] < 2500) {
+          console.log('found suitable image with dimensions: ' + image['width'] + ' x ' + image['height']);
+          $.backstretch(image['url'], {speed: 1000}, function() {
+            lastBackgroundChange = new Date();
+            fetchingBackground = false;
+          });
+        } else {
+          console.log("image not the right size: " + image['width'] + ' x ' + image['height'])
+        }
+      } catch(e) {
+        console.log("error while fetching commons image " + url + " : " + e);
+      } finally {
         fetchingBackground = false;
       }
     });
