@@ -7,7 +7,7 @@ var namespaceLimit = "all";
 var includeRobots = true;
 var includeUsers = true;
 var includeAnonymous = true;
-var backgroundTimeout = 1000 * 10;
+var backgroundTimeout = 1000 * 5;
 var showBackground = true;
 var fetchingBackground = false;
 var lastBackgroundChange = new Date() - backgroundTimeout;
@@ -66,7 +66,7 @@ function addUpdate(msg) {
       for (pageId in imageInfo['query']['pages']) break;
       try {
         var image = imageInfo['query']['pages'][pageId]['imageinfo'][0];
-        if (image && image['width'] > 500 && image['height'] > 500 &&
+        if (image && image['width'] > 400 && image['height'] > 400 &&
             image['width'] < 2500 && image['height'] < 2500) {
           console.log('found suitable image with dimensions: ' + image['width'] + ' x ' + image['height']);
           $.backstretch(image['url'], {speed: 1000}, function() {
@@ -148,26 +148,28 @@ function setupControls() {
     wikipediaLimit = ($('select[name="wikis"]').val());
   });
 
+  /* don't display changing backgrounds on mobile devices */
+  if (isMobile()) {
+    $('input[name="background"]').attr('checked', false);
+    showBackground = false;
+  }
+
   $('input[type="checkbox"]').change(function() {
-    var userType = $(this).attr("name");
+    var name = $(this).attr("name");
     var checked = $(this).attr("checked");
-    if (userType == "user") {
+    if (name == "user") {
       includeUsers = checked;
-    } else if (userType == "robot") {
+    } else if (name == "robot") {
       includeRobots = checked;
-    } else if (userType == "anonymous") {
+    } else if (name == "anonymous") {
       includeAnonymous = checked;
+    } else if (name == "background") {
+      showBackground = checked; 
     }
   });
   $('select[name="namespace"]').change(function() {
     namespaceLimit = ($('select[name="namespace"]').val());
   });
-  $('input[name="background"]').change(function() {
-    showBackground = ! showBackground;
-    if (! showBackground) 
-      $("body").css('background-image', '');
-  });
-
   $(document).bind('keyup', 'p', togglePause);
   $(document).bind('keyup', 'pause', togglePause);
 }
@@ -193,4 +195,8 @@ function userFilter(msg) {
     return false;
   }
   return true;
+}
+
+function isMobile() {
+  return screen.width <= 480;
 }
