@@ -26,6 +26,9 @@ function listen(config, callback) {
         stats(m);
       }
     });
+    client.on('error', function(msg) {
+      console.log("irc error: " + msg);
+    });
   });
 
   setDailyStatsTimeout();  
