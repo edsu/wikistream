@@ -2,6 +2,7 @@
 html
   head
     title= title
+    meta( name='viewport', content='width=device-width, minimum-scale=1.0, maximum-scale=1.0')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/smoothness/jquery-ui-1.8.13.custom.css')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Slackey', rel='stylesheet')
@@ -41,7 +42,7 @@ html
         | | 
         a(href="/about/") About
 
-    a(href="http://github.com/edsu/wikistream")
+    a(id="github", href="http://github.com/edsu/wikistream")
       img(style="position: absolute; top: 0; right: 0; border: 0; z-index: 3;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
     br
     div(id="content")!= body

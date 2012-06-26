@@ -196,3 +196,53 @@ select#wikis {
     -o-background-size: cover;
     background-size: cover;
 }
+
+/* style changes for mobile devices */
+
+@media only screen and (max-device-width: 480px) {
+
+    /* 
+    header {
+        display: none;
+    }
+    */
+
+    #controls {
+        display: none;
+    }
+
+    #github {
+        display: none;
+    }
+
+    .update img {
+        display: none;
+    }
+
+    .update .lang {
+        display: none;
+    }
+
+    .update .delta {
+        display: none;
+    }
+
+    .update {
+        border-bottom: thin gray solid;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    #updatePanel {
+        width: 100%;
+        margin: 2px 0px 2px 0px;
+    }
+
+    #about {
+        width: 95%;
+        font-size: 12pt;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
