@@ -8,7 +8,7 @@ a {
     text-decoration: none;
 }
 
-header {
+header.screen {
     margin-left: auto;
     margin-right: auto;
     width: 275px;
@@ -18,6 +18,10 @@ header {
     margin-top: 10px;
     opacity: 0.7;
     background-color: white; 
+}
+
+header.mobile {
+    display: none;
 }
 
 header span.wikistream {
@@ -201,11 +205,25 @@ select#wikis {
 
 @media only screen and (max-device-width: 480px) {
 
-    /* 
-    header {
+    header.screen {
         display: none;
     }
-    */
+
+    header.mobile {
+        font-size: 13pt;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        width: 280px;
+        margin-top: 8px;
+        margin-bottom: 3px;
+        border-bottom: thin solid #aaaaaa;
+    }
+
+    header img {
+        display: none;
+    }
 
     #controls {
         display: none;
@@ -228,14 +246,21 @@ select#wikis {
     }
 
     .update {
-        border-bottom: thin gray solid;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        margin-bottom: 5px;
+        border: thin #eeeeee solid;
+        background-color: #eeeeee;
+    }
+
+    .update a {
+        font-size:  11pt;
     }
 
     #updatePanel {
-        width: 100%;
-        margin: 2px 0px 2px 0px;
+        padding-top: 0px;
+        width: 90%;
+        margin-top: 0px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     #about {
@@ -243,6 +268,38 @@ select#wikis {
         font-size: 12pt;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    #stats {
+        padding: 0px 0px 0px 0px;
+    }
+
+    #stats h2 {
+        text-align: center;
+    }
+
+    .statsPanel {
+        clear: both;
+    }
+
+    #articlesHourly {
+        margin: 0px 0px 0px 0px;
+        width: 95%;
+    }
+
+    #articlesDaily {
+        margin: 0px 0px 0px 0px;
+        width: 95%;
+    }
+
+    #usersDaily {
+        margin: 0px 0px 0px 0px;
+        width: 95%;
+    }
+
+    #robotsDaily {
+        margin: 0px 0px 0px 0px;
+        width: 95%;
     }
 
 }
