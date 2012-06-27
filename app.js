@@ -35,6 +35,7 @@ wikisSorted.sort(function (a, b) {
 app.configure(function () {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  app.use(redirectOldPort);
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -165,3 +166,22 @@ function zresults(resp) {
   }
   return results;
 }
+
+/* this is only really needed on inkdroid.org where wikistream was initially
+ * deployed to inkdroid.org:3000 and cited there, which resulted
+ * in google using inkdroid.org:3000 as the canonical URL for wikistream
+ * this bit of middleware will permanently redirect :3000 requests that 
+ * bypass the proxy to wikistream.inkdroid.org. Hopefully Google will 
+ * update their index :-)
+ */
+
+function redirectOldPort(req, res, next) {
+  if (req.header('host') == 'inkdroid.org:3000' 
+          && ! req.header('x-forwarded-for')) {
+    res.redirect('http://wikistream.inkdroid.org' + req.url, 301);
+  } else {
+    next();
+  }
+}
+
+
