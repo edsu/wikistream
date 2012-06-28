@@ -1,7 +1,8 @@
-wikistream is a Node webapp for helping visualize current editing
-activity in wikipedia. It uses node.js, socket.io and redis to sit in the
+Wikistream is a Node.js webapp for helping visualize current editing
+activity in Wikipedia. It uses Node.js, socket.io and Redis to sit in the
 wikimedia IRC chat rooms (where updates are published), and makes them available
-on the Web in realtime.
+on the Web in realtime. Redis is used to keep tallies of various things 
+for the hourly and daily trends reporting.
 
 Installation
 ------------
