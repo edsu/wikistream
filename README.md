@@ -44,7 +44,8 @@ The icons were created by Delphine Ménard, and are separately available at:
 * http://commons.wikimedia.org/wiki/File:Icon_robot.svg
 * http://commons.wikimedia.org/wiki/File:Icon_anon.svg
 
-Authors: 
+Authors
+-------
 
 * Ed Summers (http://twitter.com/edsu)
 * Sean Hannan (http://twitter.com/mrdys)
