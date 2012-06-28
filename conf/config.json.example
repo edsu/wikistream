@@ -1,8 +1,9 @@
 {
-  "ircNick": "wikistream", 
+  "ircNick": "test-wikistream", 
   "ircUserName": "wikistream-bot", 
   "ircRealName": "http://github.com/edsu/wikistream", 
   "log": false, 
+  "transports": ["websocket", "flashsocket", "htmlfile", "xhr-polling", "jsonp-polling"],
   "port": 3000,
   "wikipedias": {
     "#vo.wikipedia": {

@@ -73,6 +73,7 @@ app.get('/commons-image/:page', function (req, res){
   http.get(opts, function (response) {
     //res.header('Content-Type', 'application/json');
     response.on('data', function (chunk) {
+      res.setHeader('Cache-Control', 'public, max-age=1000')
       res.write(chunk);
     });
     response.on('end', function () {
@@ -141,10 +142,9 @@ var io = sio.listen(app);
 
 io.configure('production', function () {
   io.set('log level', 2);
-  // disabled websocket since it doesn't seem to work with node http-proxy
-  // which I am using on inkdroid.org to partition traffic YMMV
-  io.set('transports', ['flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 });
+
+io.set('transports', config.transports);
 
 io.sockets.on('connection', function (socket) {
   sockets.push(socket);
@@ -183,5 +183,3 @@ function redirectOldPort(req, res, next) {
     next();
   }
 }
-
-
