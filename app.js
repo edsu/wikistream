@@ -16,7 +16,6 @@ var configPath = path.join(__dirname, "config.json");
 var config = JSON.parse(fs.readFileSync(configPath));
 var app = module.exports = express.createServer();
 var requestCount = 0;
-var sockets = [];
 
 // get the wikipedia shortnames sorted by their longname
 
@@ -131,29 +130,19 @@ app.listen(config.port);
 
 // set up socket.io to stream the irc updates
 
-function sendUpdate(message) {
-  _.each(sockets, function (socket) {
-    socket.emit('message', message);
-  });
-}
-
-var updateStream = irc.listen(config, sendUpdate);
 var io = sio.listen(app);
+
+var updateStream = irc.listen(config, function(message) {
+  io.sockets.emit('message', message);
+});
 
 io.configure('production', function () {
   io.set('log level', 2);
 });
 
-io.set('transports', config.transports);
+// some proxy environments might not support all socketio's transports
 
-io.sockets.on('connection', function (socket) {
-  sockets.push(socket);
-  console.log("adding a socket, now " + sockets.length + ' total');
-  socket.on('disconnect', function () {
-    sockets = _.without(sockets, socket);
-    console.log("removing a socket, now " + sockets.length + ' total');
-  });
-});
+io.set('transports', config.transports);
 
 // little helper to package up zrevrange redis query results
 
