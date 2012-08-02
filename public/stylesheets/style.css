@@ -201,6 +201,18 @@ select#wikis {
     background-size: cover;
 }
 
+#backgroundInfo {
+    background-color: #eeeeee;
+    border: thin #cccccc;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    max-width: 250px;
+    font-size: 8pt;
+    padding: 5px;
+    display: none;
+}
+
 /* style changes for mobile devices */
 
 @media only screen and (max-device-width: 480px) {
@@ -300,6 +312,10 @@ select#wikis {
     #robotsDaily {
         margin: 0px 0px 0px 0px;
         width: 95%;
+    }
+
+    #backgroundInfo {
+        display: none;
     }
 
 }

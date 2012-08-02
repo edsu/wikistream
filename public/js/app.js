@@ -65,13 +65,25 @@ function addUpdate(msg) {
     $.getJSON(url, function(imageInfo) {
       for (pageId in imageInfo['query']['pages']) break;
       try {
+        var title = imageInfo['query']['pages'][pageId]['title'];
         var image = imageInfo['query']['pages'][pageId]['imageinfo'][0];
         if (image && image['width'] > 400 && image['height'] > 400 &&
             image['width'] < 2500 && image['height'] < 2500) {
           console.log('found suitable image with dimensions: ' + image['width'] + ' x ' + image['height']);
+          // change the background image
           $.backstretch(image['url'], {speed: 1000}, function() {
             lastBackgroundChange = new Date();
             fetchingBackground = false;
+          });
+          // also update the image attribution information
+          $("#backgroundInfo").fadeOut(function() {
+            $("#backgroundInfo").empty();
+            $("#backgroundInfo").append(
+              $("<a>").attr({"href": image.descriptionurl}).text(title), 
+              "<br> by ",
+              $("<a>").attr({"href": "http://commons.wikimedia.org/wiki/User:" + image.user}).text(image.user)
+            );
+            $("#backgroundInfo").fadeIn();
           });
         } else {
           console.log("image not the right size: " + image['width'] + ' x ' + image['height'])
@@ -172,6 +184,7 @@ function setupControls() {
   });
   $(document).bind('keyup', 'p', togglePause);
   $(document).bind('keyup', 'pause', togglePause);
+
 }
 
 function wikipediaFilter(msg) {
