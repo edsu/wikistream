@@ -207,9 +207,9 @@ select#wikis {
     position: absolute;
     left: 10px;
     top: 10px;
-    max-width: 250px;
+    max-width: 300px;
     font-size: 8pt;
-    padding: 5px;
+    padding: 3px;
     display: none;
 }
 
