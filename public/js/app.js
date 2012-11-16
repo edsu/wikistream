@@ -27,6 +27,7 @@ function init() {
     // update the stream
     addUpdate(msg);
     removeOld();
+
   });
 }
 
@@ -158,6 +159,7 @@ function setupControls() {
 
   $('select[name="wikis"]').change(function() {
     wikipediaLimit = ($('select[name="wikis"]').val());
+    $.bbq.pushState({wiki: wikipediaLimit.replace("#", "")});
   });
 
   /* don't display changing backgrounds on mobile devices */
@@ -178,13 +180,32 @@ function setupControls() {
     } else if (name == "background") {
       showBackground = checked; 
     }
+    if (checked) {
+      var state = {};
+      state[name] = checked;
+      $.bbq.pushState(state, checked)
+    } else {
+      $.bbq.removeState(name);
+    }
   });
   $('select[name="namespace"]').change(function() {
     namespaceLimit = ($('select[name="namespace"]').val());
+    $.bbq.pushState({namespace: $('select[name="namespace"]').val()});
   });
   $(document).bind('keyup', 'p', togglePause);
   $(document).bind('keyup', 'pause', togglePause);
 
+  // see if hash frag determines some of the control settings
+  if ($.bbq.getState("wiki")) {
+    $('select[name="wikis"]')
+        .val("#" + $.bbq.getState("wiki"))
+        .change();
+  }
+  if ($.bbq.getState("namespace")) {
+    $('select[name="namespace"]')
+      .val($.bbq.getState("namespace"))
+      .change();
+  }
 }
 
 function wikipediaFilter(msg) {
