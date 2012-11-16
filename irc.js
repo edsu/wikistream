@@ -18,7 +18,13 @@ function listen(config, callback) {
   })
 
   client.connect(function () {
-    client.join(channels);
+    // there seems to be a limit (not sure if on server or in irc-js)
+    // on how many channels can be joined at once, so join 10 at a time
+    for (var i = 0; i < channels.length; i += 10) { 
+      c = channels.slice(i, i + 10);
+      client.join(c);
+      console.log("joining: " + c);
+    }
     client.on('privmsg', function(msg) { 
       m = parse_msg(msg.params, config);
       if (m) {
