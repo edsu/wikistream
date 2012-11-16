@@ -43,7 +43,7 @@ function listen(config, callback) {
 
 function parse_msg(msg, config) {
   // i guess this means i have two problems now? :-D
-  var m = /\x0314\[\[\x0307(.+?)\x0314\]\]\x034 (.*?)\x0310.*\x0302(.*?)\x03.+\x0303(.+?)\x03.+\x03 (.*) \x0310(.*)\x03?.*/.exec(msg[1]);
+  var m = /\x0314\[\[\x0307(.+?)\x0314\]\]\x034 (.*?)\x0310.*\x0302(.*?)\x03.+\x0303(.+?)\x03.+\x03 (.*) \x0310(.*)\u0003.*/.exec(msg[1]);
   if (! m) { 
       console.log("failed to parse: " + msg);
       return null;
