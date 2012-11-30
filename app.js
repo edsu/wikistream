@@ -5,7 +5,6 @@ var fs = require('fs'),
     sys = require('sys'),
     http = require('http'),
     path = require('path'),
-    redis = require('redis'),
     _ = require('underscore'),
     sio = require('socket.io'),
     express = require('express');
@@ -55,8 +54,7 @@ app.get('/', function (req, res){
     title: 'wikistream',
     wikis: config.wikipedias,
     wikisSorted: wikisSorted,
-    stream: true,
-    trends: false
+    stream: true
   });
 });
 
@@ -81,14 +79,6 @@ app.get('/commons-image/:page', function (req, res){
   });
 });
 
-app.get('/trends/', function (req, res){
-  res.render('trends', {
-    title: 'wikistream daily trends',
-    stream: false,
-    trends: true
-  });
-});
-
 app.get('/about/', function (req, res){
   res.render('about', {
     title: 'about wikistream',
@@ -97,36 +87,7 @@ app.get('/about/', function (req, res){
   });
 });
 
-// TODO: might be able to create one stats view that does all these?
-
-stats = redis.createClient(),
-
-app.get('/stats/users-daily.json', function (req, res){
-  stats.zrevrange(['users-daily', 0, 99, 'withscores'], function (e, r) {
-    res.send(zresults(r));
-  });
-});
-
-app.get('/stats/articles-daily.json', function (req, res){
-  stats.zrevrange(['articles-daily', 0, 99, 'withscores'], function (e, r) {
-    res.send(zresults(r));
-  });
-});
-
-app.get('/stats/articles-hourly.json', function (req, res){
-  stats.zrevrange(['articles-hourly', 0, 99, 'withscores'], function (e, r) {
-    res.send(zresults(r));
-  });
-});
-
-app.get('/stats/robots-daily.json', function (req, res){
-  stats.zrevrange(['robots-daily', 0, 99, 'withscores'], function (e, r) {
-    res.send(zresults(r));
-  });
-});
-
 app.listen(config.port);
-
 
 // set up socket.io to stream the irc updates
 
@@ -143,18 +104,6 @@ io.configure('production', function () {
 // some proxy environments might not support all socketio's transports
 
 io.set('transports', config.transports);
-
-// little helper to package up zrevrange redis query results
-
-function zresults(resp) {
-  results = []
-  for (var i=0; i < resp.length; i+=2) {
-    r = JSON.parse(resp[i]);
-    r['score'] = resp[i+1];
-    results.push(r)
-  }
-  return results;
-}
 
 /* this is only really needed on inkdroid.org where wikistream was initially
  * deployed to inkdroid.org:3000 and cited there, which resulted

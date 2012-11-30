@@ -1,7 +1,6 @@
 var fs = require('fs'),
     path = require('path'),
-    irc = require('irc-js'),
-    redis = require('redis').createClient();
+    irc = require('irc-js');
 
 function listen(config, callback) {
   channels = [];
@@ -29,16 +28,12 @@ function listen(config, callback) {
       m = parse_msg(msg.params, config);
       if (m) {
         callback(m);
-        stats(m);
       }
     });
     client.on('error', function(msg) {
       console.log("irc error: " + msg);
     });
   });
-
-  setDailyStatsTimeout();  
-  setHourlyStatsTimeout();
 }
 
 function parse_msg(msg, config) {
@@ -91,75 +86,6 @@ function parse_msg(msg, config) {
     robot: isRobot,
     anonymous: anonymous,
     namespace: namespace
-  }
-}
-
-function stats(msg) {
-  dailyStats(msg);
-  hourlyStats(msg);
-  permStats(msg);
-}
-
-function dailyStats(msg) {
-  redis.zincrby('wikipedias-daily', 1, msg.wikipedia);
-  if (msg.namespace == "article") {
-    redis.zincrby('articles-daily', 1, JSON.stringify(
-      {name: msg.page, 'url': msg.pageUrl, 'wikipedia': msg.wikipediaShort}));
-  }
-  if (msg.robot) {
-    redis.zincrby('robots-daily', 1, JSON.stringify(
-      {name: msg.user, url: msg.userUrl, 'wikipedia': msg.wikipediaShort}));
-
-  } else {
-    redis.zincrby('users-daily', 1, JSON.stringify(
-      {name: msg.user, url: msg.userUrl, 'wikipedia': msg.wikipediaShort}));
-  }
-}
-
-function setDailyStatsTimeout() {
-  var t = new Date();
-  var elapsed = t.getUTCHours() * 60 * 60 
-                + t.getUTCMinutes() * 60 
-                + t.getUTCSeconds();
-  var remaining = 24 * 60 * 60 - elapsed;
-  setTimeout(resetDailyStats, remaining * 1000);
-}
-
-function resetDailyStats() {
-  console.log("resetting daily stats");
-  redis.del('articles-daily');
-  redis.del('robots-daily');
-  redis.del('users-daily');
-  redis.del('wikipedias-daily');
-  setDailyStatsTimeout();
-}
-
-function hourlyStats(msg) {
-  if (msg.namespace == "article") {
-    redis.zincrby('articles-hourly', 1, JSON.stringify(
-      {name: msg.page, 'url': msg.pageUrl, 'wikipedia': msg.wikipediaShort}));
-  }
-}
-
-function setHourlyStatsTimeout() {
-  var t = new Date();
-  var elapsed = t.getUTCMinutes() * 60 + t.getUTCSeconds();
-  var remaining = 60 * 60 - elapsed;
-  setTimeout(resetHourlyStats, remaining * 1000);
-}
-
-function resetHourlyStats() {
-  console.log("resetting daily stats");
-  redis.del('articles-hourly');
-  setHourlyStatsTimeout();
-}
-
-function permStats(msg) {
-  if (msg.robot) {
-    redis.zincrby('robots', 1, msg.user);
-  }
-  if (msg.namespace != "article") {
-    redis.zincrby('namespaces', 1, msg.namespace);
   }
 }
 

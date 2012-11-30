@@ -11,6 +11,7 @@ a {
 header.screen {
     margin-left: auto;
     margin-right: auto;
+    height: 65px;
     width: 275px;
     color: gray;
     padding: 5px;
@@ -30,7 +31,7 @@ header span.wikistream {
 }
 
 header span.pauseInfo {
-    font-size: 9pt;
+    font-size: 8pt;
 }
 
 header img {

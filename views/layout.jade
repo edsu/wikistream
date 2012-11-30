@@ -17,9 +17,6 @@ html
         script(src='/js/jquery.backstretch.js')
         script(src='/js/jquery.ba-bbq.min.js')
 
-    - if (trends)
-        script(src="/js/trends.js")
-
     script(type="text/javascript")
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-16871278-3']);
@@ -33,23 +30,15 @@ html
   body
     header(class='screen')
       img(src="/images/wikipedia.png")
+      br
       span(class='wikistream') 
         a(href="/") wikistream
       br
       span(class='pauseInfo') Press "p" to pause
-      br
-      span(class='trends')
-        a(href="/trends/") Trends 
-        | | 
-        a(href="/about/") About
 
     header(class='mobile')
       strong 
         a(href="/") wikistream
-      | :
-      a(href="/trends/") trends 
-      | |
-      a(href="/about/") about
 
     a(id="github", href="http://github.com/edsu/wikistream")
       img(style="position: absolute; top: 0; right: 0; border: 0; z-index: 3;", src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
