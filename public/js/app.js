@@ -126,8 +126,8 @@ function userIcon(msg) {
   // construct a link to the user profile
   wikipediaHost = msg.wikipedia.replace('#', '') + '.org'
   userLink= $("<a>").attr({
-    'href': 'http://' + wikipediaHost + '/wiki/User:' + msg.user,
-    'target': '_new',
+    href: msg.userUrl,
+    target: '_new',
   });
 
   var src = title = null;

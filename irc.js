@@ -64,6 +64,7 @@ function parse_msg(msg, config) {
   var page = m[1];
   var wikipedia = msg[0];
   var wikipediaUrl = 'http://' + wikipedia.replace('#', '') + '.org';
+  if (wikipedia == "#wikidata.wikipedia") wikipediaUrl = 'http://wikidata.org';
   var pageUrl = wikipediaUrl + '/wiki/' + page.replace(/ /g, '_');
   var userUrl = wikipediaUrl + '/wiki/User:' + user;
   var namespace = getNamespace(wikipedia, page, config);
