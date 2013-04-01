@@ -2,7 +2,6 @@
 
 var fs = require('fs'),
     irc = require('./irc'),
-    sys = require('sys'),
     http = require('http'),
     path = require('path'),
     _ = require('underscore'),
