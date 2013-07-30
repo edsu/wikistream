@@ -1,12 +1,12 @@
 // imports
 
 var fs = require('fs'),
-    irc = require('./irc'),
     http = require('http'),
     path = require('path'),
     _ = require('underscore'),
     sio = require('socket.io'),
-    express = require('express');
+    express = require('express'),
+    wikichanges = require('wikichanges');
 
 // get the configuration
 
@@ -18,10 +18,10 @@ var requestCount = 0;
 // get the wikipedia shortnames sorted by their longname
 
 var wikisSorted = [];
-for (var chan in config.wikipedias) wikisSorted.push(chan);
+for (var chan in wikichanges.wikipedias) wikisSorted.push(chan);
 wikisSorted.sort(function (a, b) {
-  w1 = config.wikipedias[a].long;
-  w2 = config.wikipedias[b].long;
+  w1 = wikichanges.wikipedias[a].long;
+  w2 = wikichanges.wikipedias[b].long;
   if (w1 == w2) return 0;
   else if (w1 < w2) return -1;
   else if (w1 > w2) return 1;
@@ -51,7 +51,7 @@ app.configure('production', function () {
 app.get('/', function (req, res){
   res.render('index', {
     title: 'wikistream',
-    wikis: config.wikipedias,
+    wikis: wikichanges.wikipedias,
     wikisSorted: wikisSorted,
     stream: true
   });
@@ -92,7 +92,8 @@ app.listen(config.port);
 
 var io = sio.listen(app);
 
-var updateStream = irc.listen(config, function(message) {
+var changes = new wikichanges.WikiChanges({ircNickname: config.ircNickname});
+changes.listen(function(message) {
   io.sockets.emit('message', message);
 });
 
