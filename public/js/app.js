@@ -210,7 +210,7 @@ function setupControls() {
 
 function wikipediaFilter(msg) {
   if (wikipediaLimit == "all") return true;
-  if (wikipediaLimit == msg.wikipedia) return true;
+  if (wikipediaLimit == msg.channel) return true;
   return false;
 }
 
