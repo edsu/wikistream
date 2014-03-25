@@ -10,15 +10,15 @@ Installation
 These instructions assume you have Ubuntu. If you don't you'll need to figure
 out the equivalent instructions. It shouldn't be too complicated. 
 
-First, you need to get redis and nodejs, and nodejs dependencies
+First, you need to get Node and dependencies:
 
-    sudo apt-get install redis-server nodejs npm
+    sudo apt-get install nodejs
     npm install
 
 Next you''ll want to use and/or adjust the default configuration:
 
     cp conf/config.json.example config.json
-    
+
 You may want to adjust the ircNick that is in the example to something unique,
 so that you will be able to join the channels without a collision. Also you 
 can adjust the wikipedia language channels that are being monitored.

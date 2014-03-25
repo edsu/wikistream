@@ -5,7 +5,6 @@
     "dependencies": {
       "express": "2.5.x",
       "jade": "0.12.x",
-      "redis": "0.6.x",
       "coloured": "0.2.x",
       "log": "1.2.x",
       "socket.io": "0.9.x",
