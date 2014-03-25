@@ -1,10 +1,7 @@
-Wikistream is a Node webapp for helping visualize current editing
-activity in Wikipedia. The app sits in the wikimedia IRC chat rooms (where 
-updates are published by the various Mediawiki instances), and makes them 
-available on the Web in realtime.
+wikistream
+==========
 
-The code for listening to the IRC update stream was split out into a separate 
-Node module called [wikichanges](https://www.npmjs.org/package/wikichanges).
+Wikistream is a Node webapp for helping visualize current editing activity in Wikipedia. The app sits in the wikimedia IRC chat rooms (where updates are published by the various Mediawiki instances), and makes them available on the Web in realtime. The code for listening to the IRC update stream was split out into a separate Node module called [wikichanges](https://www.npmjs.org/package/wikichanges).
 
 Installation
 ------------
