@@ -170,7 +170,10 @@ function setupControls() {
 
   $('input[type="checkbox"]').change(function() {
     var name = $(this).attr("name");
-    var checked = $(this).attr("checked");
+    var checked = $(this).is(":checked");
+
+    console.log(name + ": " + checked);
+
     if (name == "user") {
       includeUsers = checked;
     } else if (name == "robot") {
@@ -180,13 +183,9 @@ function setupControls() {
     } else if (name == "background") {
       showBackground = checked; 
     }
-    if (checked) {
-      var state = {};
-      state[name] = checked;
-      $.bbq.pushState(state, checked)
-    } else {
-      $.bbq.removeState(name);
-    }
+    var state = {};
+    state[name] = checked;
+    $.bbq.pushState(state, checked)
   });
   $('select[name="namespace"]').change(function() {
     namespaceLimit = ($('select[name="namespace"]').val());
