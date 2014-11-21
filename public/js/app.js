@@ -205,6 +205,15 @@ function setupControls() {
       .val($.bbq.getState("namespace"))
       .change();
   }
+  if ($.bbq.getState("robot") == "false") {
+    $('input[name="robot"]').prop('checked', false).change();;
+  }
+  if ($.bbq.getState("anonymous") == "false") {
+    $('input[name="anonymous"]').prop('checked', false).change();;
+  }
+  if ($.bbq.getState("user") == "false") {
+    $('input[name="user"]').prop('checked', false).change();;
+  }
 }
 
 function wikipediaFilter(msg) {
