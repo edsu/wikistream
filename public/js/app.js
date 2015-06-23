@@ -14,6 +14,7 @@ var lastBackgroundChange = new Date() - backgroundTimeout;
 
 function init() {
   setupControls();
+  var numUpdates = getNumUpdates();
   var socket = io.connect();
   socket.on('message', function(msg) {
     
@@ -26,9 +27,21 @@ function init() {
 
     // update the stream
     addUpdate(msg);
-    removeOld();
+    removeOld(numUpdates);
 
   });
+
+  $(window).resize(function() {
+    numUpdates = getNumUpdates();
+  });
+}
+
+function getNumUpdates() {
+  var panelHeight = $(window).height() - $('#updatePanel').offset().top - 40;
+  $('#updatePanel').height(panelHeight);
+  numUpdates = Math.floor(panelHeight / 25);
+  console.log('keep track of ' + numUpdates + ' updates');
+  return numUpdates;
 }
 
 function addUpdate(msg) {
@@ -98,10 +111,8 @@ function addUpdate(msg) {
   }
 }
 
-function removeOld() {
-  // remove the old stuff
-  var old = $('.update').slice(30)
-  old.fadeOut('fast', function() { old.detach(); });
+function removeOld(numUpdates) {
+  $('.update').slice(numUpdates).detach();
 }
 
 function togglePause() {

@@ -2,6 +2,7 @@ body {
     margin: 0;
     font: 10pt "Courier New";
     height: 1000px;
+    overflow: hidden;
 }
 
 a {
@@ -45,7 +46,6 @@ header img {
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
-    height: 825px;
     width: 800px;
     padding: 4px;
     background-color: white;
