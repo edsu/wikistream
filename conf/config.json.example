@@ -1,6 +1,5 @@
 {
-  "ircNick": "test-wikistream", 
-  "ircUserName": "wikistream-bot", 
+  "ircNickname": "test-wikistream", 
   "ircRealName": "http://github.com/edsu/wikistream", 
   "log": false, 
   "transports": ["websocket", "flashsocket", "htmlfile", "xhr-polling", "jsonp-polling"],
