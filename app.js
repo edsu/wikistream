@@ -1,7 +1,7 @@
 // imports
 
 var fs = require('fs'),
-    http = require('http'),
+    http = require('https'),
     path = require('path'),
     _ = require('underscore'),
     sio = require('socket.io'),
