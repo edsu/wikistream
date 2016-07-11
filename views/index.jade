@@ -11,35 +11,35 @@ div(id="updatePanel")
           option(value="all") All Namespaces
           option(value="article") Article
           option(value="category") Category
-          option(value="category talk") Category Talk 
-          option(value="file") File 
-          option(value="file talk") File Talk 
+          option(value="category talk") Category Talk
+          option(value="file") File
+          option(value="file talk") File Talk
           option(value="help") Help
-          option(value="help talk") Help Talk 
-          option(value="media") Media 
-          option(value="mediawiki") MediaWiki 
-          option(value="mediawiki talk") MediaWiki Talk 
-          option(value="project talk") Project Talk 
+          option(value="help talk") Help Talk
+          option(value="media") Media
+          option(value="mediawiki") MediaWiki
+          option(value="mediawiki talk") MediaWiki Talk
+          option(value="project talk") Project Talk
           option(value="special") Special
-          option(value="talk") Talk 
-          option(value="template") Template 
+          option(value="talk") Talk
+          option(value="template") Template
           option(value="template talk") Template Talk
-          option(value="user") User 
+          option(value="user") User
           option(value="user talk") User Talk
           option(value="wikipedia") Wikipedia
-      td 
-        input(type="checkbox", name="user", checked="true")
-        img(src="/images/person.png", title="Wikipedia User")
-        input(type="checkbox", name="robot", checked="true")
-        img(src="/images/robot.png", title="Wikipedia Robot")
-        input(type="checkbox", name="anonymous", checked="true")
-        img(src="/images/question.png", title="Anonymous User")
-        input(type="checkbox", name="background", checked="true")
-        img(src="/images/images.png", title="Set background to a recent Wikimedia Commons image.")
+      td
+        input(type="checkbox", name="user", checked="checked")
+        img(src="/images/person.png", title="Wikipedia User", alt="Wikipedia User")
+        input(type="checkbox", name="robot", checked="checked")
+        img(src="/images/robot.png", title="Wikipedia Robot", alt="Wikipedia Robot")
+        input(type="checkbox", name="anonymous", checked="checked")
+        img(src="/images/question.png", title="Anonymous User", alt="Anonymous User")
+        input(type="checkbox", name="background", checked="checked")
+        img(src="/images/images.png", title="Set background to a recent Wikimedia Commons image.", alt="Set background image.")
       td(id="deltaControl")
         span(id="slider")
-        span(id="deltaLabel") Edit Size (Chars): ± 
+        span(id="deltaLabel") Edit Size (Chars): ±
         span(id="deltaLimit") 0
-  div(id='backgroundInfo')      
+  div(id='backgroundInfo')
     a()
   div(id='updates')
