@@ -37,7 +37,7 @@ function init() {
 }
 
 function getNumUpdates() {
-  var panelHeight = $(window).height() - $('#updatePanel').offset().top - 40;
+  var panelHeight = $(window).height() - $('#updatePanel').offset().top + 50;
   $('#updatePanel').height(panelHeight);
   numUpdates = Math.floor(panelHeight / 25);
   console.log('keep track of ' + numUpdates + ' updates');

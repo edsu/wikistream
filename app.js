@@ -67,9 +67,7 @@ app.get('/commons-image/:page', function (req, res){
     path: path
   };
   http.get(opts, function (response) {
-    //res.header('Content-Type', 'application/json');
     response.on('data', function (chunk) {
-      res.setHeader('Cache-Control', 'public, max-age=1000')
       res.write(chunk);
     });
     response.on('end', function () {
