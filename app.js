@@ -93,6 +93,7 @@ var io = sio.listen(app);
 var changes = new wikichanges.WikiChanges({ircNickname: config.ircNickname});
 changes.listen(function(message) {
   io.sockets.emit('message', message);
+  io.set('log level', 0);
 });
 
 io.configure('production', function () {
