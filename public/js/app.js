@@ -46,7 +46,7 @@ function getNumUpdates() {
 
 function addUpdate(msg) {
   var lang = $('<span>').attr({'class': 'lang'}).text('[' + msg.wikipediaShort + ']');
-  var a = $('<a>').attr({'class': 'page', 'href': msg.url, 'title': msg.comment, target: '_new'}).text(msg.page);
+  var a = $('<a>').attr({'class': 'page', 'href': msg.url, 'title': msg.comment, target: '_blank'}).text(msg.page);
   var delta;
   if (msg.delta == null) delta = "n/a";
   else if (msg.delta < 0) delta = msg.delta;
